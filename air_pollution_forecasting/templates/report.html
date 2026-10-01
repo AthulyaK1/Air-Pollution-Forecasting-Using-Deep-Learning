@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AirSense – Reports</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#F5F7FA;font-family:'Inter',sans-serif;min-height:100vh}
+.header{background:#fff;border-bottom:1px solid #E5E7EB;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:30px;height:30px;background:#1A6FC4;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.9rem}
+.logo-name{font-size:1.1rem;font-weight:700;color:#1A2533}
+.logo-badge{font-size:0.58rem;font-weight:600;color:#1A6FC4;border:1.5px solid #1A6FC4;padding:1px 6px;border-radius:4px;margin-left:4px}
+.nav a{color:#6B7280;text-decoration:none;font-size:0.82rem;font-weight:500;margin-left:22px;transition:color 0.15s}
+.nav a:hover,.nav a.active{color:#1A6FC4}
+.nav a.active{font-weight:600;border-bottom:2px solid #1A6FC4;padding-bottom:2px}
+.logout-btn{background:none;border:1.5px solid #E5E7EB;color:#EF4444;font-size:0.78rem;font-weight:600;padding:6px 14px;border-radius:7px;cursor:pointer;margin-left:14px}
+.logout-btn:hover{background:#FEF2F2}
+.wrap{max-width:900px;margin:0 auto;padding:36px 20px}
+.back{display:flex;align-items:center;gap:6px;font-size:0.8rem;color:#6B7280;text-decoration:none;margin-bottom:20px}
+.back:hover{color:#1A6FC4}
+.page-title{font-size:1.3rem;font-weight:700;color:#1A2533;margin-bottom:6px}
+.page-sub{font-size:0.82rem;color:#8A9BB0;margin-bottom:24px}
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.07);overflow:hidden;margin-bottom:20px}
+.card-top{background:#fff;border-bottom:1px solid #E5E7EB;padding:14px 20px;display:flex;align-items:center;gap:7px}
+.dot{width:11px;height:11px;border-radius:50%}
+.top-title{font-size:0.72rem;font-weight:600;color:#6B7280;margin-left:6px;letter-spacing:0.06em}
+.card-body{padding:24px}
+.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.sum-card{background:#F9FAFB;border:1px solid #E5E7EB;border-radius:10px;padding:16px}
+.sum-label{font-size:0.68rem;font-weight:600;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:6px}
+.sum-val{font-size:1.1rem;font-weight:700;color:#1A2533}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:0.75rem;font-weight:600;color:#4B5563;letter-spacing:0.05em;margin-bottom:7px;text-transform:uppercase}
+.field select,.field input{width:100%;background:#F9FAFB;border:1.5px solid #E5E7EB;border-radius:8px;padding:10px 14px;font-size:0.85rem;color:#1A2533;font-family:'Inter',sans-serif;outline:none;transition:border-color 0.15s}
+.field select:focus,.field input:focus{border-color:#1A6FC4;background:#fff}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.alert{font-size:0.78rem;padding:10px 14px;border-radius:8px;margin-bottom:14px;display:none}
+.alert.show{display:block}
+.alert-err{background:#FEF2F2;border:1px solid #FECACA;color:#DC2626}
+.alert-ok{background:#F0FDF4;border:1px solid #BBF7D0;color:#16A34A}
+.btns{display:flex;gap:10px;justify-content:center;margin-top:20px}
+.btn{padding:10px 26px;font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:600;border-radius:8px;cursor:pointer;border:1.5px solid;transition:all 0.15s;display:flex;align-items:center;gap:6px}
+.btn-p{background:#1A6FC4;color:#fff;border-color:#1A6FC4}
+.btn-p:hover{background:#155A9E}
+.btn-r{background:#fff;color:#6B7280;border-color:#E5E7EB}
+.btn-r:hover{border-color:#EF4444;color:#EF4444}
+.btn-g{background:#16A34A;color:#fff;border-color:#16A34A}
+.btn-g:hover{background:#15803D}
+/* Chart area */
+.chart-section{display:none}
+.chart-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.chart-title{font-size:0.82rem;font-weight:600;color:#6B7280;letter-spacing:0.06em;text-transform:uppercase}
+.chart-controls{display:flex;gap:8px;align-items:center}
+.chart-select{background:#F9FAFB;border:1.5px solid #E5E7EB;border-radius:7px;padding:6px 10px;font-size:0.78rem;color:#374151;outline:none;cursor:pointer}
+.dl-btn{background:#1A6FC4;color:#fff;border:1.5px solid #1A6FC4;border-radius:7px;padding:7px 14px;font-size:0.78rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:5px}
+.dl-btn:hover{background:#155A9E}
+.chart-wrap{height:280px;position:relative;margin-bottom:16px}
+.chart-stats{display:flex;gap:24px;padding-top:14px;border-top:1px solid #F3F4F6}
+.stat-item{text-align:center}
+.stat-val{font-size:1rem;font-weight:700}
+.stat-lbl{font-size:0.68rem;color:#9CA3AF;margin-top:2px;text-transform:uppercase}
+/* Legend */
+.legend{background:#F9FAFB;border:1px solid #E5E7EB;border-radius:10px;padding:14px 18px;margin-top:4px}
+.legend-title{font-size:0.7rem;font-weight:600;color:#6B7280;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:10px}
+.legend-items{display:flex;flex-wrap:wrap;gap:12px}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:0.75rem;color:#4B5563}
+.legend-dot{width:10px;height:10px;border-radius:50%}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="logo">
+    <div class="logo-icon">◈</div>
+    <span class="logo-name">AirSense <span class="logo-badge">LSTM</span></span>
+  </div>
+  <div class="nav">
+    <a href="/dashboard">Dashboard</a>
+    <a href="/upload">Upload</a>
+    <a href="/predict">Predict</a>
+    <a href="/report" class="active">Reports</a>
+    <a href="/evaluation">Evaluation</a>
+  </div>
+  <div style="display:flex;align-items:center">
+    <span style="font-size:0.8rem;color:#6B7280">👤 {{ username if username else 'User' }}</span>
+    <a href="/logout"><button class="logout-btn">Logout</button></a>
+  </div>
+</div>
+<div class="wrap">
+  <a href="/dashboard" class="back">← Back to dashboard</a>
+  <div class="page-title">Reports</div>
+  <div class="page-sub">Generate and download air pollution reports for selected date range.</div>
+
+  <!-- Summary cards -->
+  <div class="summary-grid" id="sum-grid" style="display:none">
+    <div class="sum-card"><div class="sum-label">TOTAL RECORDS</div><div class="sum-val" id="s-total">—</div></div>
+    <div class="sum-card"><div class="sum-label">DATE RANGE</div><div class="sum-val" id="s-range">—</div></div>
+    <div class="sum-card"><div class="sum-label">POLLUTANT</div><div class="sum-val" id="s-poll">—</div></div>
+    <div class="sum-card"><div class="sum-label">MODEL</div><div class="sum-val">LSTM</div></div>
+  </div>
+
+  <!-- Filter card -->
+  <div class="card">
+    <div class="card-top">
+      <div class="dot" style="background:#FF5F56"></div>
+      <div class="dot" style="background:#FFBD2E"></div>
+      <div class="dot" style="background:#27C93F"></div>
+      <span class="top-title">REPORT GENERATION FORM</span>
+    </div>
+    <div class="card-body">
+      <div class="alert" id="msg"></div>
+      <div class="field-row">
+        <div class="field"><label>FROM DATE</label><input type="date" id="from-date"></div>
+        <div class="field"><label>TO DATE</label><input type="date" id="to-date"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>SELECT POLLUTANT</label>
+          <select id="rep-poll"><option value="PM2.5">PM2.5</option><option value="PM10">PM10</option><option value="NO2">NO₂</option><option value="CO">CO</option></select>
+        </div>
+        <div class="field"><label>TIME RANGE</label>
+          <select id="rep-range"><option value="24">Last 24 Hrs</option><option value="48">Last 48 Hrs</option><option value="168" selected>Last 7 Days</option></select>
+        </div>
+      </div>
+      <div class="btns">
+        <button class="btn btn-p" onclick="genReport()">📊 Generate Report</button>
+        <button class="btn btn-r" onclick="resetReport()">↺ Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart section -->
+  <div class="card chart-section" id="chart-section">
+    <div class="card-body">
+      <div class="chart-header">
+        <div class="chart-title">LINE VISUALIZATION</div>
+        <div class="chart-controls">
+          <select class="chart-select" id="chart-poll" onchange="switchChart()">
+            <option>PM2.5</option><option>PM10</option><option>NO2</option><option>CO</option>
+          </select>
+          <select class="chart-select" id="chart-range">
+            <option>Last 24 Hrs</option><option>Last 48 Hrs</option><option selected>Last 7 Days</option>
+          </select>
+          <button class="dl-btn" onclick="downloadCSV()">⬇ Download CSV</button>
+        </div>
+      </div>
+      <div class="chart-wrap"><canvas id="repChart"></canvas></div>
+      <div class="chart-stats">
+        <div class="stat-item"><div class="stat-val" id="st-max" style="color:#1A6FC4">—</div><div class="stat-lbl">MAX</div></div>
+        <div class="stat-item"><div class="stat-val" id="st-min" style="color:#16A34A">—</div><div class="stat-lbl">MIN</div></div>
+        <div class="stat-item"><div class="stat-val" id="st-avg" style="color:#D97706">—</div><div class="stat-lbl">AVG</div></div>
+        <div class="stat-item"><div class="stat-val" id="st-trend" style="color:#DC2626">—</div><div class="stat-lbl">TREND</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend" id="legend" style="display:none">
+    <div class="legend-title">LEGEND (AQI RANGE)</div>
+    <div class="legend-items">
+      <div class="legend-item"><div class="legend-dot" style="background:#16A34A"></div>Good (0–50)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#84CC16"></div>Satisfactory (51–100)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#EAB308"></div>Moderate (101–200)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#F97316"></div>Poor (201–300)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#EF4444"></div>Very Poor (301–400)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#A855F7"></div>Severe (401–500)</div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+let chartInst=null, reportData=[], reportPoll='PM2.5';
+const today=new Date(), week=new Date(today);
+week.setDate(today.getDate()-7);
+document.getElementById('to-date').valueAsDate=today;
+document.getElementById('from-date').valueAsDate=week;
+
+async function genReport(){
+  const poll=document.getElementById('rep-poll').value;
+  reportPoll=poll;
+  try{
+    const res=await fetch('/api/historical?pollutant='+encodeURIComponent(poll));
+    const data=await res.json();
+    if(!data.values||!data.values.length){showMsg('No data found.','err');return;}
+    reportData=data;
+    document.getElementById('sum-grid').style.display='grid';
+    document.getElementById('s-total').textContent=data.values.length.toLocaleString();
+    document.getElementById('s-range').textContent=document.getElementById('from-date').value+' to '+document.getElementById('to-date').value;
+    document.getElementById('s-poll').textContent=poll;
+    document.getElementById('chart-section').style.display='block';
+    document.getElementById('legend').style.display='block';
+    document.getElementById('chart-poll').value=poll;
+    renderChart(data);
+    showMsg('Report generated — '+data.values.length+' records found.','ok');
+  }catch(e){showMsg('Error generating report.','err');}
+}
+
+function renderChart(data){
+  const ctx=document.getElementById('repChart').getContext('2d');
+  if(chartInst)chartInst.destroy();
+  const vals=data.values;
+  const labels=data.timestamps?data.timestamps.map(t=>t.slice(11,16)):vals.map((_,i)=>i+'h');
+  const mx=Math.max(...vals),mn=Math.min(...vals),av=(vals.reduce((a,b)=>a+b,0)/vals.length).toFixed(1);
+  document.getElementById('st-max').textContent=mx.toFixed(1)+' µg/m³';
+  document.getElementById('st-min').textContent=mn.toFixed(1)+' µg/m³';
+  document.getElementById('st-avg').textContent=av+' µg/m³';
+  document.getElementById('st-trend').textContent=vals[vals.length-1]>vals[0]?'Increasing':'Decreasing';
+  chartInst=new Chart(ctx,{
+    type:'line',
+    data:{labels,datasets:[{label:reportPoll,data:vals,borderColor:'#1A6FC4',backgroundColor:'rgba(26,111,196,0.08)',borderWidth:2,pointRadius:3,pointBackgroundColor:'#1A6FC4',fill:true,tension:0.4}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{
+      x:{ticks:{color:'#9CA3AF',font:{family:'Inter',size:11},maxTicksLimit:12},grid:{color:'#F3F4F6'}},
+      y:{ticks:{color:'#9CA3AF',font:{family:'Inter',size:11}},grid:{color:'#F3F4F6'},title:{display:true,text:'Concentration (µg/m³)',color:'#9CA3AF',font:{size:11}}}
+    }}
+  });
+}
+
+async function switchChart(){
+  const poll=document.getElementById('chart-poll').value;
+  reportPoll=poll;
+  const res=await fetch('/api/historical?pollutant='+encodeURIComponent(poll));
+  const data=await res.json();
+  reportData=data;
+  renderChart(data);
+}
+
+function downloadCSV(){
+  if(!reportData||!reportData.values)return;
+  let csv='Timestamp,Pollutant,Value,Unit\n';
+  reportData.values.forEach((v,i)=>{
+    const ts=reportData.timestamps?reportData.timestamps[i]:'';
+    csv+=`${ts},${reportPoll},${v},µg/m³\n`;
+  });
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download=`report_${reportPoll}_${document.getElementById('from-date').value}.csv`;
+  a.click();
+}
+
+function resetReport(){
+  const today=new Date(),week=new Date(today);
+  week.setDate(today.getDate()-7);
+  document.getElementById('to-date').valueAsDate=today;
+  document.getElementById('from-date').valueAsDate=week;
+  document.getElementById('chart-section').style.display='none';
+  document.getElementById('legend').style.display='none';
+  document.getElementById('sum-grid').style.display='none';
+  document.getElementById('msg').className='alert';
+}
+function showMsg(msg,type){const el=document.getElementById('msg');el.textContent=msg;el.className='alert alert-'+(type==='ok'?'ok':'err')+' show';}
+</script>
+</body>
+</html>

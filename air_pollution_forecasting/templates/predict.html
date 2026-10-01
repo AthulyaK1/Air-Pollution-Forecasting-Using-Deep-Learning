@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AirSense – Predict</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#F5F7FA;font-family:'Inter',sans-serif;min-height:100vh}
+.header{background:#fff;border-bottom:1px solid #E5E7EB;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:30px;height:30px;background:#1A6FC4;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.9rem}
+.logo-name{font-size:1.1rem;font-weight:700;color:#1A2533}
+.logo-badge{font-size:0.58rem;font-weight:600;color:#1A6FC4;border:1.5px solid #1A6FC4;padding:1px 6px;border-radius:4px;margin-left:4px}
+.nav a{color:#6B7280;text-decoration:none;font-size:0.82rem;font-weight:500;margin-left:22px;transition:color 0.15s}
+.nav a:hover,.nav a.active{color:#1A6FC4}
+.nav a.active{font-weight:600;border-bottom:2px solid #1A6FC4;padding-bottom:2px}
+.logout-btn{background:none;border:1.5px solid #E5E7EB;color:#EF4444;font-size:0.78rem;font-weight:600;padding:6px 14px;border-radius:7px;cursor:pointer;margin-left:14px}
+.logout-btn:hover{background:#FEF2F2}
+.wrap{max-width:640px;margin:0 auto;padding:36px 20px}
+.back{display:flex;align-items:center;gap:6px;font-size:0.8rem;color:#6B7280;text-decoration:none;margin-bottom:20px}
+.back:hover{color:#1A6FC4}
+.page-title{font-size:1.3rem;font-weight:700;color:#1A2533;margin-bottom:6px}
+.page-sub{font-size:0.82rem;color:#8A9BB0;margin-bottom:24px;line-height:1.6}
+.card{background:#fff;border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,0.07);overflow:hidden}
+.card-top{background:#fff;border-bottom:1px solid #E5E7EB;padding:14px 20px;display:flex;align-items:center;gap:7px}
+.dot{width:11px;height:11px;border-radius:50%}
+.top-title{font-size:0.72rem;font-weight:600;color:#6B7280;margin-left:6px;letter-spacing:0.06em}
+.card-body{padding:28px}
+.form-title{font-size:1rem;font-weight:700;color:#1A2533;text-align:center;margin-bottom:4px}
+.form-sub{font-size:0.8rem;color:#8A9BB0;text-align:center;margin-bottom:24px}
+.alert{font-size:0.78rem;padding:10px 14px;border-radius:8px;margin-bottom:14px;display:none}
+.alert.show{display:block}
+.alert-err{background:#FEF2F2;border:1px solid #FECACA;color:#DC2626}
+.alert-ok{background:#F0FDF4;border:1px solid #BBF7D0;color:#16A34A}
+.field{margin-bottom:18px}
+.field label{display:block;font-size:0.75rem;font-weight:600;color:#4B5563;letter-spacing:0.05em;margin-bottom:8px;text-transform:uppercase}
+.field select,.field input{width:100%;background:#F9FAFB;border:1.5px solid #E5E7EB;border-radius:8px;padding:11px 14px;font-size:0.85rem;color:#1A2533;font-family:'Inter',sans-serif;outline:none;transition:border-color 0.15s}
+.field select:focus,.field input:focus{border-color:#1A6FC4;background:#fff}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.poll-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+.p-card{background:#F9FAFB;border:2px solid #E5E7EB;border-radius:10px;padding:14px 8px;text-align:center;cursor:pointer;transition:all 0.15s}
+.p-card:hover{border-color:#93C5FD;background:#EFF6FF}
+.p-card.sel{border-color:#1A6FC4;background:#DBEAFE}
+.p-name{font-size:0.9rem;font-weight:700;margin-bottom:3px}
+.p-unit{font-size:0.65rem;color:#9CA3AF}
+.pm25{color:#DC2626}.pm10{color:#D97706}.no2c{color:#16A34A}.coc{color:#1A6FC4}
+.btns{display:flex;gap:10px;justify-content:center;margin-top:24px}
+.btn{padding:11px 28px;font-family:'Inter',sans-serif;font-size:0.88rem;font-weight:600;border-radius:8px;cursor:pointer;border:1.5px solid;transition:all 0.15s;display:flex;align-items:center;gap:6px}
+.btn-p{background:#1A6FC4;color:#fff;border-color:#1A6FC4}
+.btn-p:hover{background:#155A9E}
+.btn-p:disabled{opacity:0.5;cursor:not-allowed}
+.btn-r{background:#fff;color:#6B7280;border-color:#E5E7EB}
+.btn-r:hover{border-color:#EF4444;color:#EF4444}
+.loading{display:none;text-align:center;padding:16px;font-size:0.82rem;color:#1A6FC4;font-weight:500}
+.spinner{display:inline-block;width:18px;height:18px;border:2px solid #BFDBFE;border-top-color:#1A6FC4;border-radius:50%;animation:spin 0.8s linear infinite;margin-right:6px;vertical-align:middle}
+@keyframes spin{to{transform:rotate(360deg)}}
+.result-box{display:none;margin-top:20px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:10px;padding:22px}
+.result-title{font-size:0.72rem;font-weight:700;color:#1A6FC4;letter-spacing:0.1em;margin-bottom:14px;text-align:center;text-transform:uppercase}
+.result-val{font-size:2.6rem;font-weight:700;color:#1A2533;text-align:center;line-height:1}
+.result-unit{font-size:0.78rem;color:#9CA3AF;text-align:center;margin:4px 0 14px}
+.result-aqi{text-align:center;font-size:0.9rem;font-weight:600;padding:8px 16px;border-radius:20px;margin-bottom:14px;display:inline-block;width:100%}
+.rrows{border-top:1px solid #DBEAFE;padding-top:12px}
+.rrow{display:flex;justify-content:space-between;font-size:0.78rem;padding:5px 0;border-bottom:1px solid #EFF6FF}
+.rrow:last-child{border-bottom:none}
+.rk{color:#9CA3AF}.rv{color:#374151;font-weight:500}
+.res-btns{display:flex;gap:10px;margin-top:14px;justify-content:center}
+.explanation{margin-top:16px;padding:14px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;font-size:0.78rem;color:#6B7280;line-height:1.7}
+.explanation strong{color:#374151}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="logo">
+    <div class="logo-icon">◈</div>
+    <span class="logo-name">AirSense <span class="logo-badge">LSTM</span></span>
+  </div>
+  <div class="nav">
+    <a href="/dashboard">Dashboard</a>
+    <a href="/upload">Upload</a>
+    <a href="/predict" class="active">Predict</a>
+    <a href="/report">Reports</a>
+    <a href="/evaluation">Evaluation</a>
+  </div>
+  <div style="display:flex;align-items:center">
+    <span style="font-size:0.8rem;color:#6B7280">👤 {{ username if username else 'User' }}</span>
+    <a href="/logout"><button class="logout-btn">Logout</button></a>
+  </div>
+</div>
+<div class="wrap">
+  <a href="/dashboard" class="back">← Back to dashboard</a>
+  <div class="page-title">Generate Prediction</div>
+  <div class="page-sub">Configure prediction parameters for AI model and view output results.</div>
+  <div class="card">
+    <div class="card-top">
+      <div class="dot" style="background:#FF5F56"></div>
+      <div class="dot" style="background:#FFBD2E"></div>
+      <div class="dot" style="background:#27C93F"></div>
+      <span class="top-title">PREDICTION CONFIGURATION</span>
+    </div>
+    <div class="card-body">
+      <div class="form-title">PREDICTION CONFIGURATION</div>
+      <div class="form-sub">Select input parameters and settings for prediction</div>
+      <div class="alert" id="msg"></div>
+      <div class="field">
+        <label>SELECT POLLUTANT</label>
+        <div class="poll-grid">
+          <div class="p-card sel" onclick="selPoll('PM2.5',this)"><div class="p-name pm25">PM2.5</div><div class="p-unit">µg/m³</div></div>
+          <div class="p-card" onclick="selPoll('PM10',this)"><div class="p-name pm10">PM10</div><div class="p-unit">µg/m³</div></div>
+          <div class="p-card" onclick="selPoll('NO2',this)"><div class="p-name no2c">NO₂</div><div class="p-unit">µg/m³</div></div>
+          <div class="p-card" onclick="selPoll('CO',this)"><div class="p-name coc">CO</div><div class="p-unit">mg/m³</div></div>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>PREDICTION DATE</label><input type="date" id="pred-date"></div>
+        <div class="field"><label>FORECAST HORIZON</label>
+          <select id="pred-hrs"><option value="12">Next 12 Hours</option><option value="24" selected>Next 24 Hours</option><option value="48">Next 48 Hours</option></select>
+        </div>
+      </div>
+      <div class="field"><label>POLLUTANT</label>
+        <select id="pred-poll"><option>PM2.5</option><option>PM10</option><option>NO2</option><option>CO</option></select>
+      </div>
+      <div class="field"><label>UNIT OF MEASUREMENT</label>
+        <select id="pred-unit"><option>µg/m³</option><option>mg/m³</option></select>
+      </div>
+      <div class="field"><label>LOCATION</label>
+        <select><option>Delhi – Anand Vihar</option><option>Delhi – Connaught Place</option><option>Delhi – Rohini</option></select>
+      </div>
+      <div class="loading" id="loading"><div class="spinner"></div>Running LSTM model...</div>
+      <div class="btns">
+        <button class="btn btn-p" id="pred-btn" onclick="runPred()">⚡ Generate Prediction</button>
+        <button class="btn btn-r" onclick="resetPred()">↺ Reset</button>
+      </div>
+      <div class="result-box" id="result-box">
+        <div class="result-title">LSTM PREDICTION RESULT</div>
+        <div class="result-val" id="r-val">—</div>
+        <div class="result-unit" id="r-unit">µg/m³</div>
+        <div class="result-aqi" id="r-aqi"></div>
+        <div class="rrows">
+          <div class="rrow"><span class="rk">Pollutant</span><span class="rv" id="r-poll">—</span></div>
+          <div class="rrow"><span class="rk">Prediction Date</span><span class="rv" id="r-date">—</span></div>
+          <div class="rrow"><span class="rk">Forecast Horizon</span><span class="rv" id="r-hrs">—</span></div>
+          <div class="rrow"><span class="rk">Model</span><span class="rv">LSTM · PyTorch · 2-layer</span></div>
+          <div class="rrow"><span class="rk">Health Advisory</span><span class="rv" id="r-adv">—</span></div>
+        </div>
+        <div class="res-btns">
+          <button class="btn btn-p" onclick="window.location='/dashboard'">📊 View Graph</button>
+          <button class="btn btn-r" onclick="dlResult()">⬇ Download</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+<script>
+let selPollutant='PM2.5';
+document.getElementById('pred-date').valueAsDate=new Date();
+function selPoll(name,el){
+  selPollutant=name;
+  document.querySelectorAll('.p-card').forEach(c=>c.classList.remove('sel'));
+  el.classList.add('sel');
+}
+async function runPred(){
+  const date=document.getElementById('pred-date').value;
+  const hrs=document.getElementById('pred-hrs').value;
+  if(!date){showMsg('Please select a prediction date.','err');return;}
+  document.getElementById('loading').style.display='block';
+  document.getElementById('pred-btn').disabled=true;
+  document.getElementById('result-box').style.display='none';
+  try{
+    const res=await fetch('/api/forecast',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pollutant:selPollutant,steps:parseInt(hrs)})});
+    const data=await res.json();
+    if(data.predictions&&data.predictions.length>0){showResult(data,date,hrs);}
+    else showMsg('Prediction failed. Please try again.','err');
+  }catch(e){showMsg('Server error. Make sure app.py is running.','err');}
+  finally{document.getElementById('loading').style.display='none';document.getElementById('pred-btn').disabled=false;}
+}
+function showResult(data,date,hrs){
+  const preds=data.predictions;
+  const max=Math.max(...preds.map(p=>p.value));
+  const cat=preds[0].category;
+  const unit=preds[0].unit;
+  const adv={Good:'Safe for all activities.',Satisfactory:'Acceptable — sensitive persons take care.',Moderate:'Limit outdoor activities.',Poor:'Reduce prolonged outdoor exertion.',['Very Poor']:'Avoid outdoor — wear mask.',Severe:'Health emergency — stay indoors.'};
+  const colors={Good:'#F0FDF4',Satisfactory:'#F7FEE7',Moderate:'#FFFBEB',Poor:'#FFF7ED',['Very Poor']:'#FEF2F2',Severe:'#FDF2F8'};
+  const textc={Good:'#16A34A',Satisfactory:'#65A30D',Moderate:'#D97706',Poor:'#EA580C',['Very Poor']:'#DC2626',Severe:'#9D174D'};
+  document.getElementById('r-val').textContent=max.toFixed(1);
+  document.getElementById('r-unit').textContent=unit;
+  document.getElementById('r-poll').textContent=selPollutant;
+  document.getElementById('r-date').textContent=date;
+  document.getElementById('r-hrs').textContent=hrs+' hours';
+  document.getElementById('r-adv').textContent=adv[cat]||'Monitor air quality.';
+  const aq=document.getElementById('r-aqi');
+  aq.textContent='AQI Category: '+cat;
+  aq.style.background=colors[cat]||'#F9FAFB';
+  aq.style.color=textc[cat]||'#374151';
+  document.getElementById('result-box').style.display='block';
+  window._lastPred={pollutant:selPollutant,date,predictions:preds};
+}
+function dlResult(){
+  if(!window._lastPred)return;
+  const {pollutant,date,predictions}=window._lastPred;
+  let csv='Timestamp,Pollutant,Predicted Value,Unit,AQI,Category\n';
+  predictions.forEach(p=>{csv+=`${p.timestamp},${pollutant},${p.value},${p.unit},${p.aqi},${p.category}\n`;});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download=`prediction_${pollutant}_${date}.csv`;a.click();
+}
+function resetPred(){
+  document.getElementById('pred-date').valueAsDate=new Date();
+  document.getElementById('pred-hrs').value='24';
+  document.getElementById('result-box').style.display='none';
+  document.getElementById('msg').className='alert';
+}
+function showMsg(msg,type){const el=document.getElementById('msg');el.textContent=msg;el.className='alert alert-'+(type==='ok'?'ok':'err')+' show';}
+</script>
+</body>
+</html>

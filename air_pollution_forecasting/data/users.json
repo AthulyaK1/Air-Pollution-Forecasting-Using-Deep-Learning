@@ -1,0 +1,30 @@
+{
+  "admin": {
+    "password": "admin123",
+    "role": "Admin"
+  },
+  "athulya": {
+    "password": "mca2026",
+    "role": "Student"
+  },
+  "guest": {
+    "password": "guest123",
+    "role": "Guest"
+  },
+  "neenu": {
+    "password": "neenu@2002",
+    "role": "Student"
+  },
+  "athulya2": {
+    "password": "athulya12345@",
+    "role": "Student"
+  },
+  "Athulya123": {
+    "password": "athulya123@",
+    "role": "Student"
+  },
+  "athulyaa123": {
+    "password": "athulyaa123@",
+    "role": "Student"
+  }
+}

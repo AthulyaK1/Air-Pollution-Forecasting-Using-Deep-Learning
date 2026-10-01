@@ -1,0 +1,188 @@
+============================================================
+  AIR POLLUTION FORECASTING MODULE
+============================================================
+  Generated at : 2026-05-30 07:32:05
+  Forecast     : Next 48 hours
+
+  Dataset loaded : 8760 rows
+  Using last 24 hours as input seed
+
+============================================================
+  FORECAST : PM2.5
+============================================================
+  Hour   Time                    Value    AQI  Category
+  -------------------------------------------------------
+  1      2026-05-30 07:32     148.77 µg/m³   322   Very Poor
+  2      2026-05-30 08:32     144.52 µg/m³   319   Very Poor
+  3      2026-05-30 09:32     141.22 µg/m³   317   Very Poor
+  4      2026-05-30 10:32     138.29 µg/m³   314   Very Poor
+  5      2026-05-30 11:32     135.50 µg/m³   312   Very Poor
+  6      2026-05-30 12:32     132.78 µg/m³   310   Very Poor
+  7      2026-05-30 13:32     130.09 µg/m³   308   Very Poor
+  8      2026-05-30 14:32     127.41 µg/m³   306   Very Poor
+  9      2026-05-30 15:32     124.71 µg/m³   304   Very Poor
+  10     2026-05-30 16:32     122.00 µg/m³   302   Very Poor
+  11     2026-05-30 17:32     119.26 µg/m³   297   Poor
+  12     2026-05-30 18:32     116.50 µg/m³   288   Poor
+  13     2026-05-30 19:32     113.71 µg/m³   279   Poor
+  14     2026-05-30 20:32     110.89 µg/m³   269   Poor
+  15     2026-05-30 21:32     108.12 µg/m³   260   Poor
+  16     2026-05-30 22:32     105.48 µg/m³   252   Poor
+  17     2026-05-30 23:32     103.00 µg/m³   243   Poor
+  18     2026-05-31 00:32     100.64 µg/m³   236   Poor
+  19     2026-05-31 01:32      98.41 µg/m³   228   Poor
+  20     2026-05-31 02:32      96.28 µg/m³   221   Poor
+  21     2026-05-31 03:32      94.23 µg/m³   214   Poor
+  22     2026-05-31 04:32      92.28 µg/m³   208   Poor
+  23     2026-05-31 05:32      90.40 µg/m³   202   Poor
+  24     2026-05-31 06:32      88.59 µg/m³   195   Moderate
+
+  24-Hour Summary:
+    Min predicted  : 88.59 µg/m³
+    Max predicted  : 148.77 µg/m³
+    Avg predicted  : 115.96 µg/m³
+    Min AQI        : 195
+    Max AQI        : 322
+    Worst Category : Very Poor
+
+  Health Advisory:
+    Avoid outdoor activities. Wear mask if going outside.
+
+============================================================
+  FORECAST : PM10
+============================================================
+  Hour   Time                    Value    AQI  Category
+  -------------------------------------------------------
+  1      2026-05-30 07:32     150.39 µg/m³   134   Moderate
+  2      2026-05-30 08:32     144.27 µg/m³   130   Moderate
+  3      2026-05-30 09:32     139.88 µg/m³   127   Moderate
+  4      2026-05-30 10:32     136.57 µg/m³   125   Moderate
+  5      2026-05-30 11:32     134.11 µg/m³   123   Moderate
+  6      2026-05-30 12:32     132.32 µg/m³   122   Moderate
+  7      2026-05-30 13:32     131.02 µg/m³   121   Moderate
+  8      2026-05-30 14:32     130.04 µg/m³   120   Moderate
+  9      2026-05-30 15:32     129.25 µg/m³   120   Moderate
+  10     2026-05-30 16:32     128.56 µg/m³   119   Moderate
+  11     2026-05-30 17:32     127.91 µg/m³   119   Moderate
+  12     2026-05-30 18:32     127.27 µg/m³   118   Moderate
+  13     2026-05-30 19:32     126.63 µg/m³   118   Moderate
+  14     2026-05-30 20:32     125.99 µg/m³   118   Moderate
+  15     2026-05-30 21:32     125.35 µg/m³   117   Moderate
+  16     2026-05-30 22:32     124.71 µg/m³   117   Moderate
+  17     2026-05-30 23:32     124.09 µg/m³   116   Moderate
+  18     2026-05-31 00:32     123.48 µg/m³   116   Moderate
+  19     2026-05-31 01:32     122.88 µg/m³   116   Moderate
+  20     2026-05-31 02:32     122.31 µg/m³   115   Moderate
+  21     2026-05-31 03:32     121.75 µg/m³   115   Moderate
+  22     2026-05-31 04:32     121.21 µg/m³   114   Moderate
+  23     2026-05-31 05:32     120.68 µg/m³   114   Moderate
+  24     2026-05-31 06:32     120.18 µg/m³   114   Moderate
+
+  24-Hour Summary:
+    Min predicted  : 120.18 µg/m³
+    Max predicted  : 150.39 µg/m³
+    Avg predicted  : 128.79 µg/m³
+    Min AQI        : 114
+    Max AQI        : 134
+    Worst Category : Moderate
+
+  Health Advisory:
+    Sensitive groups should limit outdoor activities.
+
+============================================================
+  FORECAST : NO2
+============================================================
+  Hour   Time                    Value    AQI  Category
+  -------------------------------------------------------
+  1      2026-05-30 07:32      55.20 µg/m³    69   Satisfactory
+  2      2026-05-30 08:32      45.87 µg/m³    58   Satisfactory
+  3      2026-05-30 09:32      38.41 µg/m³    48   Good
+  4      2026-05-30 10:32      34.29 µg/m³    42   Good
+  5      2026-05-30 11:32      32.84 µg/m³    41   Good
+  6      2026-05-30 12:32      32.64 µg/m³    40   Good
+  7      2026-05-30 13:32      32.89 µg/m³    41   Good
+  8      2026-05-30 14:32      33.20 µg/m³    41   Good
+  9      2026-05-30 15:32      33.44 µg/m³    41   Good
+  10     2026-05-30 16:32      33.56 µg/m³    41   Good
+  11     2026-05-30 17:32      33.63 µg/m³    42   Good
+  12     2026-05-30 18:32      33.84 µg/m³    42   Good
+  13     2026-05-30 19:32      34.37 µg/m³    42   Good
+  14     2026-05-30 20:32      35.26 µg/m³    44   Good
+  15     2026-05-30 21:32      36.37 µg/m³    45   Good
+  16     2026-05-30 22:32      37.40 µg/m³    46   Good
+  17     2026-05-30 23:32      38.11 µg/m³    47   Good
+  18     2026-05-31 00:32      38.41 µg/m³    48   Good
+  19     2026-05-31 01:32      38.26 µg/m³    47   Good
+  20     2026-05-31 02:32      37.73 µg/m³    47   Good
+  21     2026-05-31 03:32      36.93 µg/m³    46   Good
+  22     2026-05-31 04:32      36.03 µg/m³    45   Good
+  23     2026-05-31 05:32      35.19 µg/m³    43   Good
+  24     2026-05-31 06:32      34.53 µg/m³    43   Good
+
+  24-Hour Summary:
+    Min predicted  : 32.64 µg/m³
+    Max predicted  : 55.20 µg/m³
+    Avg predicted  : 36.60 µg/m³
+    Min AQI        : 40
+    Max AQI        : 69
+    Worst Category : Satisfactory
+
+  Health Advisory:
+    Air quality is acceptable. Sensitive people take care.
+
+============================================================
+  FORECAST : CO
+============================================================
+  Hour   Time                    Value    AQI  Category
+  -------------------------------------------------------
+  1      2026-05-30 07:32       1.30 mg/m³    65   Satisfactory
+  2      2026-05-30 08:32       1.13 mg/m³    57   Satisfactory
+  3      2026-05-30 09:32       0.96 mg/m³    47   Good
+  4      2026-05-30 10:32       0.85 mg/m³    42   Good
+  5      2026-05-30 11:32       0.84 mg/m³    42   Good
+  6      2026-05-30 12:32       0.91 mg/m³    45   Good
+  7      2026-05-30 13:32       0.99 mg/m³    49   Good
+  8      2026-05-30 14:32       1.06 mg/m³    54   Satisfactory
+  9      2026-05-30 15:32       1.10 mg/m³    55   Satisfactory
+  10     2026-05-30 16:32       1.09 mg/m³    55   Satisfactory
+  11     2026-05-30 17:32       1.05 mg/m³    53   Satisfactory
+  12     2026-05-30 18:32       0.98 mg/m³    48   Good
+  13     2026-05-30 19:32       0.90 mg/m³    44   Good
+  14     2026-05-30 20:32       0.83 mg/m³    41   Good
+  15     2026-05-30 21:32       0.80 mg/m³    39   Good
+  16     2026-05-30 22:32       0.80 mg/m³    40   Good
+  17     2026-05-30 23:32       0.83 mg/m³    41   Good
+  18     2026-05-31 00:32       0.87 mg/m³    43   Good
+  19     2026-05-31 01:32       0.91 mg/m³    45   Good
+  20     2026-05-31 02:32       0.92 mg/m³    46   Good
+  21     2026-05-31 03:32       0.92 mg/m³    45   Good
+  22     2026-05-31 04:32       0.89 mg/m³    44   Good
+  23     2026-05-31 05:32       0.86 mg/m³    42   Good
+  24     2026-05-31 06:32       0.83 mg/m³    41   Good
+
+  24-Hour Summary:
+    Min predicted  : 0.80 mg/m³
+    Max predicted  : 1.30 mg/m³
+    Avg predicted  : 0.94 mg/m³
+    Min AQI        : 39
+    Max AQI        : 65
+    Worst Category : Satisfactory
+
+  Health Advisory:
+    Air quality is acceptable. Sensitive people take care.
+
+============================================================
+  FORECAST COMPLETE
+============================================================
+  Results saved  : data/forecast_results.csv
+  Total rows     : 192
+
+  Worst predicted condition:
+    Pollutant : PM2.5
+    Time      : 2026-05-30 07:32
+    Value     : 148.77 µg/m³
+    AQI       : 322
+    Category  : Very Poor
+    Advice    : Avoid outdoor activities. Wear mask if going outside.
+
+  Next step: python app.py  ->  http://127.0.0.1:5000

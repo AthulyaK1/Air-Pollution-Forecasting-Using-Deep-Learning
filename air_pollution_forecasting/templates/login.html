@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AirSense – Login</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#F5F7FA;font-family:'Inter',sans-serif;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.logo-wrap{display:flex;align-items:center;gap:10px;margin-bottom:28px}
+.logo-icon{width:36px;height:36px;background:#1A6FC4;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.1rem}
+.logo-name{font-size:1.4rem;font-weight:700;color:#1A2533}
+.logo-badge{font-size:0.6rem;font-weight:600;color:#1A6FC4;border:1.5px solid #1A6FC4;padding:2px 7px;border-radius:4px;margin-left:4px;vertical-align:middle}
+.card{background:#fff;border-radius:14px;box-shadow:0 4px 24px rgba(0,0,0,0.09);width:100%;max-width:480px;overflow:hidden}
+.tabs{display:flex;border-bottom:1px solid #E8EEF4}
+.tab{flex:1;padding:14px 8px;font-size:0.72rem;font-weight:500;color:#8A9BB0;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all 0.15s;display:flex;flex-direction:column;align-items:center;gap:4px}
+.tab-icon{font-size:1rem}
+.tab:hover{color:#1A6FC4}
+.tab.active{color:#1A6FC4;border-bottom-color:#1A6FC4;background:#F5F9FF}
+.card-body{padding:32px}
+.form-title{font-size:1.1rem;font-weight:700;color:#1A2533;text-align:center;margin-bottom:4px}
+.form-sub{font-size:0.8rem;color:#8A9BB0;text-align:center;margin-bottom:24px}
+.panel{display:none}.panel.active{display:block}
+.alert{font-size:0.78rem;padding:10px 14px;border-radius:8px;margin-bottom:16px;display:none}
+.alert.show{display:block}
+.alert-err{background:#FEF2F2;border:1px solid #FECACA;color:#DC2626}
+.alert-ok{background:#F0FDF4;border:1px solid #BBF7D0;color:#16A34A}
+.field{margin-bottom:16px}
+.field label{display:block;font-size:0.75rem;font-weight:600;color:#4B5563;margin-bottom:6px}
+.inp-wrap{position:relative}
+.inp-icon{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#8A9BB0;font-size:0.95rem}
+.field input{width:100%;background:#F9FAFB;border:1.5px solid #E5E7EB;border-radius:8px;padding:11px 40px 11px 38px;font-size:0.85rem;color:#1A2533;font-family:'Inter',sans-serif;outline:none;transition:all 0.15s}
+.field input:focus{border-color:#1A6FC4;background:#fff;box-shadow:0 0 0 3px rgba(26,111,196,0.1)}
+.field input::placeholder{color:#C4CBD4}
+.field select{width:100%;background:#F9FAFB;border:1.5px solid #E5E7EB;border-radius:8px;padding:11px 14px;font-size:0.85rem;color:#1A2533;font-family:'Inter',sans-serif;outline:none;cursor:pointer;transition:border-color 0.15s}
+.field select:focus{border-color:#1A6FC4;background:#fff}
+.eye{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:#8A9BB0;cursor:pointer;font-size:0.9rem;padding:2px}
+.eye:hover{color:#1A6FC4}
+.sb{height:4px;background:#E5E7EB;border-radius:2px;margin-top:6px;overflow:hidden}
+.sf{height:100%;width:0%;border-radius:2px;transition:width 0.3s,background 0.3s}
+.sl{font-size:0.7rem;color:#8A9BB0;margin-top:3px}
+.btns{display:flex;gap:10px;margin-top:22px}
+.btn{flex:1;padding:11px;font-family:'Inter',sans-serif;font-size:0.85rem;font-weight:600;border-radius:8px;cursor:pointer;border:1.5px solid;transition:all 0.15s;display:flex;align-items:center;justify-content:center;gap:6px}
+.btn-p{background:#1A6FC4;color:#fff;border-color:#1A6FC4}
+.btn-p:hover{background:#155A9E}
+.btn-r{background:#fff;color:#6B7280;border-color:#E5E7EB}
+.btn-r:hover{border-color:#1A6FC4;color:#1A6FC4}
+.footer{text-align:center;font-size:0.72rem;color:#8A9BB0;margin-top:18px}
+</style>
+</head>
+<body>
+<div class="logo-wrap">
+  <div class="logo-icon">◈</div>
+  <span class="logo-name">AirSense <span class="logo-badge">LSTM</span></span>
+</div>
+<div class="card">
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('login',this)"><span class="tab-icon">👤</span>LOGIN</button>
+    <button class="tab" onclick="switchTab('create',this)"><span class="tab-icon">➕</span>CREATE ACCOUNT</button>
+    <button class="tab" onclick="switchTab('resetpwd',this)"><span class="tab-icon">🔒</span>RESET PASSWORD</button>
+    <button class="tab" onclick="switchTab('resetuser',this)"><span class="tab-icon">✏️</span>RESET USERNAME</button>
+  </div>
+  <div class="card-body">
+
+    <!-- LOGIN -->
+    <div class="panel active" id="panel-login">
+      <div class="form-title">LOGIN FORM</div>
+      <div class="form-sub">Please enter your credentials to login</div>
+      {% if error %}<div class="alert alert-err show">{{ error }}</div>{% endif %}
+      <div class="alert alert-ok" id="l-ok"></div>
+      <form method="POST" action="/login">
+        <div class="field">
+          <label>Username</label>
+          <div class="inp-wrap">
+            <span class="inp-icon">👤</span>
+            <input type="text" name="username" placeholder="Enter username" required>
+          </div>
+        </div>
+        <div class="field">
+          <label>Password</label>
+          <div class="inp-wrap">
+            <span class="inp-icon">🔒</span>
+            <input type="password" name="password" id="l-pass" placeholder="Enter password" required>
+            <button type="button" class="eye" onclick="toggleEye('l-pass',this)">👁</button>
+          </div>
+        </div>
+        <div class="btns">
+          <button type="submit" class="btn btn-p">🔑 Login</button>
+          <button type="reset" class="btn btn-r">↺ Reset</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- CREATE -->
+    <div class="panel" id="panel-create">
+      <div class="form-title">CREATE ACCOUNT</div>
+      <div class="form-sub">Register a new user account</div>
+      <div class="alert" id="ca-msg"></div>
+      <div class="field"><label>Username</label>
+        <div class="inp-wrap"><span class="inp-icon">👤</span>
+        <input type="text" id="ca-user" placeholder="Choose username"></div></div>
+      <div class="field"><label>Password</label>
+        <div class="inp-wrap"><span class="inp-icon">🔒</span>
+        <input type="password" id="ca-pass" placeholder="Min 8 characters" oninput="strength(this.value,'ca')">
+        <button type="button" class="eye" onclick="toggleEye('ca-pass',this)">👁</button></div>
+        <div class="sb"><div class="sf" id="ca-sf"></div></div>
+        <div class="sl" id="ca-sl"></div>
+      </div>
+      <div class="field"><label>Confirm Password</label>
+        <div class="inp-wrap"><span class="inp-icon">🔒</span>
+        <input type="password" id="ca-conf" placeholder="Re-enter password">
+        <button type="button" class="eye" onclick="toggleEye('ca-conf',this)">👁</button></div></div>
+      <div class="field"><label>Role</label>
+        <select id="ca-role"><option>Student</option><option>Researcher</option><option>Guest</option></select></div>
+      <div class="btns">
+        <button class="btn btn-p" onclick="doCreate()">✅ Create Account</button>
+        <button class="btn btn-r" onclick="clearPanel('ca')">↺ Reset</button>
+      </div>
+    </div>
+
+    <!-- RESET PASSWORD -->
+    <div class="panel" id="panel-resetpwd">
+      <div class="form-title">RESET PASSWORD</div>
+      <div class="form-sub">Verify identity then set new password</div>
+      <div class="alert" id="rp-msg"></div>
+      <div class="field"><label>Username</label>
+        <div class="inp-wrap"><span class="inp-icon">👤</span>
+        <input type="text" id="rp-user" placeholder="Your username"></div></div>
+      <div class="field"><label>Current Password</label>
+        <div class="inp-wrap"><span class="inp-icon">🔒</span>
+        <input type="password" id="rp-cur" placeholder="Current password">
+        <button type="button" class="eye" onclick="toggleEye('rp-cur',this)">👁</button></div></div>
+      <div class="field"><label>New Password</label>
+        <div class="inp-wrap"><span class="inp-icon">🔒</span>
+        <input type="password" id="rp-new" placeholder="Min 6 characters" oninput="strength(this.value,'rp')">
+        <button type="button" class="eye" onclick="toggleEye('rp-new',this)">👁</button></div>
+        <div class="sb"><div class="sf" id="rp-sf"></div></div>
+        <div class="sl" id="rp-sl"></div>
+      </div>
+      <div class="field"><label>Confirm New Password</label>
+        <div class="inp-wrap"><span class="inp-icon">🔒</span>
+        <input type="password" id="rp-conf" placeholder="Re-enter new password">
+        <button type="button" class="eye" onclick="toggleEye('rp-conf',this)">👁</button></div></div>
+      <div class="btns">
+        <button class="btn btn-p" onclick="doResetPwd()">🔒 Update Password</button>
+        <button class="btn btn-r" onclick="clearPanel('rp')">↺ Reset</button>
+      </div>
+    </div>
+
+    <!-- RESET USERNAME -->
+    <div class="panel" id="panel-resetuser">
+      <div class="form-title">RESET USERNAME</div>
+      <div class="form-sub">Verify password then set new username</div>
+      <div class="alert" id="ru-msg"></div>
+      <div class="field"><label>Current Username</label>
+        <div class="inp-wrap"><span class="inp-icon">👤</span>
+        <input type="text" id="ru-cur" placeholder="Current username"></div></div>
+      <div class="field"><label>Password</label>
+        <div class="inp-wrap"><span class="inp-icon">🔒</span>
+        <input type="password" id="ru-pass" placeholder="Your password">
+        <button type="button" class="eye" onclick="toggleEye('ru-pass',this)">👁</button></div></div>
+      <div class="field"><label>New Username</label>
+        <div class="inp-wrap"><span class="inp-icon">✏️</span>
+        <input type="text" id="ru-new" placeholder="New username (min 3 chars)"></div></div>
+      <div class="btns">
+        <button class="btn btn-p" onclick="doResetUser()">✏️ Update Username</button>
+        <button class="btn btn-r" onclick="clearPanel('ru')">↺ Reset</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<script>
+function switchTab(name,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+  btn.classList.add('active');
+}
+function toggleEye(id,btn){
+  const el=document.getElementById(id);
+  el.type=el.type==='password'?'text':'password';
+  btn.textContent=el.type==='password'?'👁':'🙈';
+}
+function showMsg(id,msg,type){
+  const el=document.getElementById(id);
+  el.textContent=msg;
+  el.className='alert alert-'+(type==='ok'?'ok':'err')+' show';
+}
+function clearPanel(prefix){
+  const map={ca:'create',rp:'resetpwd',ru:'resetuser'};
+  document.getElementById('panel-'+map[prefix]).querySelectorAll('input').forEach(i=>i.value='');
+  const msg=document.getElementById(prefix+'-msg');
+  if(msg){msg.className='alert';msg.textContent='';}
+}
+function strength(val,prefix){
+  const fill=document.getElementById(prefix+'-sf');
+  const label=document.getElementById(prefix+'-sl');
+  if(!fill)return;
+  if(!val){fill.style.width='0%';label.textContent='';return;}
+  let score=0;
+  if(val.length>=6)score++;if(val.length>=10)score++;
+  if(/[A-Z]/.test(val))score++;if(/[0-9]/.test(val))score++;
+  if(/[^A-Za-z0-9]/.test(val))score++;
+  const L=[{w:'20%',c:'#EF4444',t:'Weak'},{w:'40%',c:'#F97316',t:'Fair'},{w:'60%',c:'#EAB308',t:'Good'},{w:'80%',c:'#22C55E',t:'Strong'},{w:'100%',c:'#16A34A',t:'Very Strong'}];
+  const l=L[Math.min(score,4)];
+  fill.style.width=l.w;fill.style.background=l.c;
+  label.textContent='Strength: '+l.t;label.style.color=l.c;
+}
+async function post(url,body){
+  const res=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+  return res.json();
+}
+async function doCreate(){
+  const u=document.getElementById('ca-user').value.trim();
+  const p=document.getElementById('ca-pass').value.trim();
+  const c=document.getElementById('ca-conf').value.trim();
+  const r=document.getElementById('ca-role').value;
+  if(!u||!p||!c){showMsg('ca-msg','All fields are required.','err');return;}
+  if(p!==c){showMsg('ca-msg','Passwords do not match.','err');return;}
+  const data=await post('/create_account',{username:u,password:p,role:r});
+  showMsg('ca-msg',data.message,data.success?'ok':'err');
+  if(data.success)clearPanel('ca');
+}
+async function doResetPwd(){
+  const u=document.getElementById('rp-user').value.trim();
+  const cp=document.getElementById('rp-cur').value.trim();
+  const np=document.getElementById('rp-new').value.trim();
+  const cf=document.getElementById('rp-conf').value.trim();
+  if(!u||!cp||!np||!cf){showMsg('rp-msg','All fields are required.','err');return;}
+  if(np!==cf){showMsg('rp-msg','Passwords do not match.','err');return;}
+  const data=await post('/reset_password',{username:u,current_password:cp,new_password:np});
+  showMsg('rp-msg',data.message,data.success?'ok':'err');
+  if(data.success)clearPanel('rp');
+}
+async function doResetUser(){
+  const cu=document.getElementById('ru-cur').value.trim();
+  const p=document.getElementById('ru-pass').value.trim();
+  const nu=document.getElementById('ru-new').value.trim();
+  if(!cu||!p||!nu){showMsg('ru-msg','All fields are required.','err');return;}
+  const data=await post('/reset_username',{current_username:cu,password:p,new_username:nu});
+  showMsg('ru-msg',data.message,data.success?'ok':'err');
+  if(data.success)clearPanel('ru');
+}
+</script>
+</body>
+</html>

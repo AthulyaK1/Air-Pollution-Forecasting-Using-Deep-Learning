@@ -1,0 +1,193 @@
+datetime,hour,pollutant,predicted,unit,AQI,category,health_advice
+2026-05-30 07:32,1,PM2.5,148.77,µg/m³,322,Very Poor,Avoid outdoor activities. Wear mask if going outside.
+2026-05-30 08:32,2,PM2.5,144.52,µg/m³,319,Very Poor,Avoid outdoor activities. Wear mask if going outside.
+2026-05-30 09:32,3,PM2.5,141.22,µg/m³,317,Very Poor,Avoid outdoor activities. Wear mask if going outside.
+2026-05-30 10:32,4,PM2.5,138.29,µg/m³,314,Very Poor,Avoid outdoor activities. Wear mask if going outside.
+2026-05-30 11:32,5,PM2.5,135.5,µg/m³,312,Very Poor,Avoid outdoor activities. Wear mask if going outside.
+2026-05-30 12:32,6,PM2.5,132.78,µg/m³,310,Very Poor,Avoid outdoor activities. Wear mask if going outside.
+2026-05-30 13:32,7,PM2.5,130.09,µg/m³,308,Very Poor,Avoid outdoor activities. Wear mask if going outside.
+2026-05-30 14:32,8,PM2.5,127.41,µg/m³,306,Very Poor,Avoid outdoor activities. Wear mask if going outside.
+2026-05-30 15:32,9,PM2.5,124.71,µg/m³,304,Very Poor,Avoid outdoor activities. Wear mask if going outside.
+2026-05-30 16:32,10,PM2.5,122.0,µg/m³,302,Very Poor,Avoid outdoor activities. Wear mask if going outside.
+2026-05-30 17:32,11,PM2.5,119.26,µg/m³,297,Poor,Everyone should reduce prolonged outdoor exertion.
+2026-05-30 18:32,12,PM2.5,116.5,µg/m³,288,Poor,Everyone should reduce prolonged outdoor exertion.
+2026-05-30 19:32,13,PM2.5,113.71,µg/m³,279,Poor,Everyone should reduce prolonged outdoor exertion.
+2026-05-30 20:32,14,PM2.5,110.89,µg/m³,269,Poor,Everyone should reduce prolonged outdoor exertion.
+2026-05-30 21:32,15,PM2.5,108.12,µg/m³,260,Poor,Everyone should reduce prolonged outdoor exertion.
+2026-05-30 22:32,16,PM2.5,105.48,µg/m³,252,Poor,Everyone should reduce prolonged outdoor exertion.
+2026-05-30 23:32,17,PM2.5,103.0,µg/m³,243,Poor,Everyone should reduce prolonged outdoor exertion.
+2026-05-31 00:32,18,PM2.5,100.64,µg/m³,236,Poor,Everyone should reduce prolonged outdoor exertion.
+2026-05-31 01:32,19,PM2.5,98.41,µg/m³,228,Poor,Everyone should reduce prolonged outdoor exertion.
+2026-05-31 02:32,20,PM2.5,96.28,µg/m³,221,Poor,Everyone should reduce prolonged outdoor exertion.
+2026-05-31 03:32,21,PM2.5,94.23,µg/m³,214,Poor,Everyone should reduce prolonged outdoor exertion.
+2026-05-31 04:32,22,PM2.5,92.28,µg/m³,208,Poor,Everyone should reduce prolonged outdoor exertion.
+2026-05-31 05:32,23,PM2.5,90.4,µg/m³,202,Poor,Everyone should reduce prolonged outdoor exertion.
+2026-05-31 06:32,24,PM2.5,88.59,µg/m³,195,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 07:32,25,PM2.5,86.82,µg/m³,189,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 08:32,26,PM2.5,85.09,µg/m³,183,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 09:32,27,PM2.5,83.41,µg/m³,178,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 10:32,28,PM2.5,81.77,µg/m³,172,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 11:32,29,PM2.5,80.19,µg/m³,167,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 12:32,30,PM2.5,78.65,µg/m³,162,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 13:32,31,PM2.5,77.17,µg/m³,157,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 14:32,32,PM2.5,75.73,µg/m³,152,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 15:32,33,PM2.5,74.34,µg/m³,148,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 16:32,34,PM2.5,73.0,µg/m³,143,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 17:32,35,PM2.5,71.7,µg/m³,139,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 18:32,36,PM2.5,70.46,µg/m³,135,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 19:32,37,PM2.5,69.25,µg/m³,131,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 20:32,38,PM2.5,68.09,µg/m³,127,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 21:32,39,PM2.5,66.98,µg/m³,124,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 22:32,40,PM2.5,65.91,µg/m³,120,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 23:32,41,PM2.5,64.88,µg/m³,117,Moderate,Sensitive groups should limit outdoor activities.
+2026-06-01 00:32,42,PM2.5,63.89,µg/m³,113,Moderate,Sensitive groups should limit outdoor activities.
+2026-06-01 01:32,43,PM2.5,62.94,µg/m³,110,Moderate,Sensitive groups should limit outdoor activities.
+2026-06-01 02:32,44,PM2.5,62.03,µg/m³,107,Moderate,Sensitive groups should limit outdoor activities.
+2026-06-01 03:32,45,PM2.5,61.15,µg/m³,104,Moderate,Sensitive groups should limit outdoor activities.
+2026-06-01 04:32,46,PM2.5,60.32,µg/m³,102,Moderate,Sensitive groups should limit outdoor activities.
+2026-06-01 05:32,47,PM2.5,59.52,µg/m³,99,Satisfactory,Air quality is acceptable. Sensitive people take care.
+2026-06-01 06:32,48,PM2.5,58.75,µg/m³,97,Satisfactory,Air quality is acceptable. Sensitive people take care.
+2026-05-30 07:32,1,PM10,150.39,µg/m³,134,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-30 08:32,2,PM10,144.27,µg/m³,130,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-30 09:32,3,PM10,139.88,µg/m³,127,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-30 10:32,4,PM10,136.57,µg/m³,125,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-30 11:32,5,PM10,134.11,µg/m³,123,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-30 12:32,6,PM10,132.32,µg/m³,122,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-30 13:32,7,PM10,131.02,µg/m³,121,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-30 14:32,8,PM10,130.04,µg/m³,120,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-30 15:32,9,PM10,129.25,µg/m³,120,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-30 16:32,10,PM10,128.56,µg/m³,119,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-30 17:32,11,PM10,127.91,µg/m³,119,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-30 18:32,12,PM10,127.27,µg/m³,118,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-30 19:32,13,PM10,126.63,µg/m³,118,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-30 20:32,14,PM10,125.99,µg/m³,118,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-30 21:32,15,PM10,125.35,µg/m³,117,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-30 22:32,16,PM10,124.71,µg/m³,117,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-30 23:32,17,PM10,124.09,µg/m³,116,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 00:32,18,PM10,123.48,µg/m³,116,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 01:32,19,PM10,122.88,µg/m³,116,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 02:32,20,PM10,122.31,µg/m³,115,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 03:32,21,PM10,121.75,µg/m³,115,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 04:32,22,PM10,121.21,µg/m³,114,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 05:32,23,PM10,120.68,µg/m³,114,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 06:32,24,PM10,120.18,µg/m³,114,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 07:32,25,PM10,119.69,µg/m³,113,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 08:32,26,PM10,119.21,µg/m³,113,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 09:32,27,PM10,118.75,µg/m³,113,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 10:32,28,PM10,118.29,µg/m³,113,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 11:32,29,PM10,117.86,µg/m³,112,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 12:32,30,PM10,117.48,µg/m³,112,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 13:32,31,PM10,117.16,µg/m³,112,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 14:32,32,PM10,116.91,µg/m³,112,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 15:32,33,PM10,116.7,µg/m³,112,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 16:32,34,PM10,116.53,µg/m³,111,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 17:32,35,PM10,116.39,µg/m³,111,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 18:32,36,PM10,116.28,µg/m³,111,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 19:32,37,PM10,116.18,µg/m³,111,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 20:32,38,PM10,116.09,µg/m³,111,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 21:32,39,PM10,116.02,µg/m³,111,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 22:32,40,PM10,115.96,µg/m³,111,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-31 23:32,41,PM10,115.9,µg/m³,111,Moderate,Sensitive groups should limit outdoor activities.
+2026-06-01 00:32,42,PM10,115.85,µg/m³,111,Moderate,Sensitive groups should limit outdoor activities.
+2026-06-01 01:32,43,PM10,115.81,µg/m³,111,Moderate,Sensitive groups should limit outdoor activities.
+2026-06-01 02:32,44,PM10,115.78,µg/m³,111,Moderate,Sensitive groups should limit outdoor activities.
+2026-06-01 03:32,45,PM10,115.74,µg/m³,111,Moderate,Sensitive groups should limit outdoor activities.
+2026-06-01 04:32,46,PM10,115.72,µg/m³,111,Moderate,Sensitive groups should limit outdoor activities.
+2026-06-01 05:32,47,PM10,115.69,µg/m³,111,Moderate,Sensitive groups should limit outdoor activities.
+2026-06-01 06:32,48,PM10,115.67,µg/m³,111,Moderate,Sensitive groups should limit outdoor activities.
+2026-05-30 07:32,1,NO2,55.2,µg/m³,69,Satisfactory,Air quality is acceptable. Sensitive people take care.
+2026-05-30 08:32,2,NO2,45.87,µg/m³,58,Satisfactory,Air quality is acceptable. Sensitive people take care.
+2026-05-30 09:32,3,NO2,38.41,µg/m³,48,Good,Air quality is good. Safe for all activities.
+2026-05-30 10:32,4,NO2,34.29,µg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-05-30 11:32,5,NO2,32.84,µg/m³,41,Good,Air quality is good. Safe for all activities.
+2026-05-30 12:32,6,NO2,32.64,µg/m³,40,Good,Air quality is good. Safe for all activities.
+2026-05-30 13:32,7,NO2,32.89,µg/m³,41,Good,Air quality is good. Safe for all activities.
+2026-05-30 14:32,8,NO2,33.2,µg/m³,41,Good,Air quality is good. Safe for all activities.
+2026-05-30 15:32,9,NO2,33.44,µg/m³,41,Good,Air quality is good. Safe for all activities.
+2026-05-30 16:32,10,NO2,33.56,µg/m³,41,Good,Air quality is good. Safe for all activities.
+2026-05-30 17:32,11,NO2,33.63,µg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-05-30 18:32,12,NO2,33.84,µg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-05-30 19:32,13,NO2,34.37,µg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-05-30 20:32,14,NO2,35.26,µg/m³,44,Good,Air quality is good. Safe for all activities.
+2026-05-30 21:32,15,NO2,36.37,µg/m³,45,Good,Air quality is good. Safe for all activities.
+2026-05-30 22:32,16,NO2,37.4,µg/m³,46,Good,Air quality is good. Safe for all activities.
+2026-05-30 23:32,17,NO2,38.11,µg/m³,47,Good,Air quality is good. Safe for all activities.
+2026-05-31 00:32,18,NO2,38.41,µg/m³,48,Good,Air quality is good. Safe for all activities.
+2026-05-31 01:32,19,NO2,38.26,µg/m³,47,Good,Air quality is good. Safe for all activities.
+2026-05-31 02:32,20,NO2,37.73,µg/m³,47,Good,Air quality is good. Safe for all activities.
+2026-05-31 03:32,21,NO2,36.93,µg/m³,46,Good,Air quality is good. Safe for all activities.
+2026-05-31 04:32,22,NO2,36.03,µg/m³,45,Good,Air quality is good. Safe for all activities.
+2026-05-31 05:32,23,NO2,35.19,µg/m³,43,Good,Air quality is good. Safe for all activities.
+2026-05-31 06:32,24,NO2,34.53,µg/m³,43,Good,Air quality is good. Safe for all activities.
+2026-05-31 07:32,25,NO2,34.11,µg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-05-31 08:32,26,NO2,33.89,µg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-05-31 09:32,27,NO2,33.8,µg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-05-31 10:32,28,NO2,33.79,µg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-05-31 11:32,29,NO2,33.77,µg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-05-31 12:32,30,NO2,33.72,µg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-05-31 13:32,31,NO2,33.64,µg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-05-31 14:32,32,NO2,33.55,µg/m³,41,Good,Air quality is good. Safe for all activities.
+2026-05-31 15:32,33,NO2,33.49,µg/m³,41,Good,Air quality is good. Safe for all activities.
+2026-05-31 16:32,34,NO2,33.48,µg/m³,41,Good,Air quality is good. Safe for all activities.
+2026-05-31 17:32,35,NO2,33.53,µg/m³,41,Good,Air quality is good. Safe for all activities.
+2026-05-31 18:32,36,NO2,33.62,µg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-05-31 19:32,37,NO2,33.74,µg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-05-31 20:32,38,NO2,33.84,µg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-05-31 21:32,39,NO2,33.92,µg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-05-31 22:32,40,NO2,33.95,µg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-05-31 23:32,41,NO2,33.94,µg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-06-01 00:32,42,NO2,33.9,µg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-06-01 01:32,43,NO2,33.85,µg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-06-01 02:32,44,NO2,33.8,µg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-06-01 03:32,45,NO2,33.77,µg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-06-01 04:32,46,NO2,33.75,µg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-06-01 05:32,47,NO2,33.75,µg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-06-01 06:32,48,NO2,33.76,µg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-05-30 07:32,1,CO,1.3,mg/m³,65,Satisfactory,Air quality is acceptable. Sensitive people take care.
+2026-05-30 08:32,2,CO,1.13,mg/m³,57,Satisfactory,Air quality is acceptable. Sensitive people take care.
+2026-05-30 09:32,3,CO,0.96,mg/m³,47,Good,Air quality is good. Safe for all activities.
+2026-05-30 10:32,4,CO,0.85,mg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-05-30 11:32,5,CO,0.84,mg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-05-30 12:32,6,CO,0.91,mg/m³,45,Good,Air quality is good. Safe for all activities.
+2026-05-30 13:32,7,CO,0.99,mg/m³,49,Good,Air quality is good. Safe for all activities.
+2026-05-30 14:32,8,CO,1.06,mg/m³,54,Satisfactory,Air quality is acceptable. Sensitive people take care.
+2026-05-30 15:32,9,CO,1.1,mg/m³,55,Satisfactory,Air quality is acceptable. Sensitive people take care.
+2026-05-30 16:32,10,CO,1.09,mg/m³,55,Satisfactory,Air quality is acceptable. Sensitive people take care.
+2026-05-30 17:32,11,CO,1.05,mg/m³,53,Satisfactory,Air quality is acceptable. Sensitive people take care.
+2026-05-30 18:32,12,CO,0.98,mg/m³,48,Good,Air quality is good. Safe for all activities.
+2026-05-30 19:32,13,CO,0.9,mg/m³,44,Good,Air quality is good. Safe for all activities.
+2026-05-30 20:32,14,CO,0.83,mg/m³,41,Good,Air quality is good. Safe for all activities.
+2026-05-30 21:32,15,CO,0.8,mg/m³,39,Good,Air quality is good. Safe for all activities.
+2026-05-30 22:32,16,CO,0.8,mg/m³,40,Good,Air quality is good. Safe for all activities.
+2026-05-30 23:32,17,CO,0.83,mg/m³,41,Good,Air quality is good. Safe for all activities.
+2026-05-31 00:32,18,CO,0.87,mg/m³,43,Good,Air quality is good. Safe for all activities.
+2026-05-31 01:32,19,CO,0.91,mg/m³,45,Good,Air quality is good. Safe for all activities.
+2026-05-31 02:32,20,CO,0.92,mg/m³,46,Good,Air quality is good. Safe for all activities.
+2026-05-31 03:32,21,CO,0.92,mg/m³,45,Good,Air quality is good. Safe for all activities.
+2026-05-31 04:32,22,CO,0.89,mg/m³,44,Good,Air quality is good. Safe for all activities.
+2026-05-31 05:32,23,CO,0.86,mg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-05-31 06:32,24,CO,0.83,mg/m³,41,Good,Air quality is good. Safe for all activities.
+2026-05-31 07:32,25,CO,0.81,mg/m³,40,Good,Air quality is good. Safe for all activities.
+2026-05-31 08:32,26,CO,0.8,mg/m³,40,Good,Air quality is good. Safe for all activities.
+2026-05-31 09:32,27,CO,0.81,mg/m³,40,Good,Air quality is good. Safe for all activities.
+2026-05-31 10:32,28,CO,0.83,mg/m³,41,Good,Air quality is good. Safe for all activities.
+2026-05-31 11:32,29,CO,0.85,mg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-05-31 12:32,30,CO,0.86,mg/m³,43,Good,Air quality is good. Safe for all activities.
+2026-05-31 13:32,31,CO,0.87,mg/m³,43,Good,Air quality is good. Safe for all activities.
+2026-05-31 14:32,32,CO,0.86,mg/m³,43,Good,Air quality is good. Safe for all activities.
+2026-05-31 15:32,33,CO,0.85,mg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-05-31 16:32,34,CO,0.84,mg/m³,41,Good,Air quality is good. Safe for all activities.
+2026-05-31 17:32,35,CO,0.82,mg/m³,41,Good,Air quality is good. Safe for all activities.
+2026-05-31 18:32,36,CO,0.82,mg/m³,40,Good,Air quality is good. Safe for all activities.
+2026-05-31 19:32,37,CO,0.82,mg/m³,41,Good,Air quality is good. Safe for all activities.
+2026-05-31 20:32,38,CO,0.83,mg/m³,41,Good,Air quality is good. Safe for all activities.
+2026-05-31 21:32,39,CO,0.84,mg/m³,41,Good,Air quality is good. Safe for all activities.
+2026-05-31 22:32,40,CO,0.85,mg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-05-31 23:32,41,CO,0.85,mg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-06-01 00:32,42,CO,0.85,mg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-06-01 01:32,43,CO,0.85,mg/m³,42,Good,Air quality is good. Safe for all activities.
+2026-06-01 02:32,44,CO,0.84,mg/m³,41,Good,Air quality is good. Safe for all activities.
+2026-06-01 03:32,45,CO,0.83,mg/m³,41,Good,Air quality is good. Safe for all activities.
+2026-06-01 04:32,46,CO,0.83,mg/m³,41,Good,Air quality is good. Safe for all activities.
+2026-06-01 05:32,47,CO,0.83,mg/m³,41,Good,Air quality is good. Safe for all activities.
+2026-06-01 06:32,48,CO,0.83,mg/m³,41,Good,Air quality is good. Safe for all activities.

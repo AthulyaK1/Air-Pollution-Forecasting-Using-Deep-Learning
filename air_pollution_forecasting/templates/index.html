@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AirSense – Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#F5F7FA;font-family:'Inter',sans-serif;min-height:100vh}
+
+/* ── Header ─────────────────────────── */
+.header{background:#fff;border-bottom:1px solid #E5E7EB;padding:12px 28px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 4px rgba(0,0,0,0.06);position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:32px;height:32px;background:#1A6FC4;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem}
+.logo-name{font-size:1.1rem;font-weight:700;color:#1A2533}
+.logo-badge{font-size:0.58rem;font-weight:600;color:#1A6FC4;border:1.5px solid #1A6FC4;padding:1px 6px;border-radius:4px;margin-left:4px}
+.nav{display:flex;align-items:center}
+.nav a{color:#6B7280;text-decoration:none;font-size:0.82rem;font-weight:500;margin-left:22px;padding-bottom:2px;transition:color 0.15s;border-bottom:2px solid transparent}
+.nav a:hover{color:#1A6FC4}
+.nav a.active{color:#1A6FC4;font-weight:600;border-bottom:2px solid #1A6FC4}
+.header-right{display:flex;align-items:center;gap:14px}
+.live-dot{width:8px;height:8px;border-radius:50%;background:#16A34A;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.live-time{font-size:0.82rem;font-weight:600;color:#374151}
+.city-select{background:#F9FAFB;border:1.5px solid #E5E7EB;border-radius:7px;padding:5px 10px;font-size:0.78rem;color:#374151;outline:none;cursor:pointer}
+.user-pill{display:flex;align-items:center;gap:6px;font-size:0.8rem;color:#6B7280;background:#F9FAFB;border:1px solid #E5E7EB;padding:6px 12px;border-radius:20px;cursor:pointer}
+.logout-btn{background:none;border:1.5px solid #E5E7EB;color:#EF4444;font-size:0.78rem;font-weight:600;padding:6px 14px;border-radius:7px;cursor:pointer}
+.logout-btn:hover{background:#FEF2F2}
+
+/* ── Page ───────────────────────────── */
+.wrap{max-width:1200px;margin:0 auto;padding:24px 20px}
+
+/* ── AQI Cards ──────────────────────── */
+.aqi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.aqi-card{background:#fff;border-radius:12px;border:1px solid #E5E7EB;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);position:relative;overflow:hidden}
+.aqi-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px}
+.aqi-pm25::before{background:#EF4444}
+.aqi-pm10::before{background:#F59E0B}
+.aqi-no2::before{background:#22C55E}
+.aqi-co::before{background:#3B82F6}
+.aqi-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.aqi-label{font-size:0.75rem;font-weight:600;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.06em}
+.aqi-icon{font-size:1.2rem}
+.aqi-val{font-size:2.2rem;font-weight:700;line-height:1;margin-bottom:4px}
+.aqi-unit{font-size:0.72rem;color:#9CA3AF;margin-bottom:8px}
+.aqi-cat{font-size:0.78rem;font-weight:600;margin-bottom:10px}
+.aqi-bar{height:4px;background:#F3F4F6;border-radius:2px;overflow:hidden}
+.aqi-fill{height:100%;border-radius:2px;transition:width 0.5s}
+
+/* ── Two-column layout ──────────────── */
+.main-grid{display:grid;grid-template-columns:1fr 340px;gap:20px;margin-bottom:20px}
+
+/* ── Chart panels ───────────────────── */
+.panel{background:#fff;border-radius:12px;border:1px solid #E5E7EB;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
+.panel-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.panel-title{font-size:0.75rem;font-weight:600;color:#6B7280;letter-spacing:0.08em;text-transform:uppercase;display:flex;align-items:center;gap:7px}
+.panel-icon{font-size:0.9rem}
+.tab-btns{display:flex;gap:4px}
+.tab-btn{padding:5px 12px;font-size:0.75rem;font-weight:500;border:1.5px solid #E5E7EB;border-radius:6px;cursor:pointer;background:#fff;color:#6B7280;transition:all 0.15s}
+.tab-btn:hover{border-color:#1A6FC4;color:#1A6FC4}
+.tab-btn.active{background:#1A6FC4;color:#fff;border-color:#1A6FC4}
+.chart-wrap{height:220px;position:relative}
+.chart-stats{display:flex;gap:0;margin-top:14px;border-top:1px solid #F3F4F6;padding-top:14px}
+.cs-item{flex:1;text-align:center;border-right:1px solid #F3F4F6}
+.cs-item:last-child{border-right:none}
+.cs-val{font-size:0.92rem;font-weight:700;color:#1A2533}
+.cs-lbl{font-size:0.65rem;color:#9CA3AF;margin-top:2px;text-transform:uppercase}
+
+/* ── Live params ────────────────────── */
+.live-params{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.lp-item{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:#F9FAFB;border-radius:8px;border:1px solid #F3F4F6}
+.lp-left{display:flex;align-items:center;gap:10px}
+.lp-icon{font-size:1.2rem}
+.lp-label{font-size:0.8rem;color:#6B7280;font-weight:500}
+.lp-val{font-size:1rem;font-weight:700;color:#1A2533}
+.lp-unit{font-size:0.7rem;color:#9CA3AF;margin-left:2px}
+.last-updated{font-size:0.72rem;color:#9CA3AF;text-align:center;margin-top:12px}
+
+/* ── Forecast section ───────────────── */
+.forecast-panel{background:#fff;border-radius:12px;border:1px solid #E5E7EB;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);margin-bottom:20px}
+.forecast-controls{display:flex;align-items:center;gap:10px}
+.fc-select{background:#F9FAFB;border:1.5px solid #E5E7EB;border-radius:7px;padding:7px 12px;font-size:0.8rem;color:#374151;outline:none;cursor:pointer;font-family:'Inter',sans-serif}
+.fc-select:focus{border-color:#1A6FC4}
+.run-btn{background:#1A6FC4;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:0.82rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:'Inter',sans-serif}
+.run-btn:hover{background:#155A9E}
+.forecast-chart-wrap{height:220px;position:relative;margin-top:16px}
+.forecast-stats{display:flex;gap:24px;margin-top:14px;padding-top:14px;border-top:1px solid #F3F4F6}
+.fs-item{display:flex;flex-direction:column}
+.fs-label{font-size:0.65rem;color:#9CA3AF;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:3px}
+.fs-val{font-size:0.88rem;font-weight:700;color:#1A2533}
+
+/* ── AQI Legend ─────────────────────── */
+.legend-panel{background:#fff;border-radius:12px;border:1px solid #E5E7EB;padding:16px 20px;box-shadow:0 2px 8px rgba(0,0,0,0.05);margin-bottom:20px}
+.legend-title{font-size:0.7rem;font-weight:600;color:#6B7280;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px}
+.legend-items{display:flex;flex-wrap:wrap;gap:14px}
+.legend-item{display:flex;align-items:center;gap:6px;font-size:0.75rem;color:#4B5563;font-weight:500}
+.legend-dot{width:10px;height:10px;border-radius:50%}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="logo">
+    <div class="logo-icon">◈</div>
+    <span class="logo-name">AirSense <span class="logo-badge">LSTM</span></span>
+  </div>
+  <div class="nav">
+    <a href="/dashboard" class="active">Dashboard</a>
+    <a href="/upload">Upload Dataset</a>
+    <a href="/predict">Predict</a>
+    <a href="/report">Reports</a>
+    <a href="/evaluation">Evaluation</a>
+  </div>
+  <div class="header-right">
+    <div class="live-dot"></div>
+    <div class="live-time" id="live-time">--:-- --</div>
+    <select class="city-select"><option>Delhi, IN</option></select>
+    <div class="user-pill">👤 {{ username if username else 'User' }} ▾</div>
+    <a href="/logout"><button class="logout-btn">Logout</button></a>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- AQI Cards -->
+  <div class="aqi-grid">
+    <div class="aqi-card aqi-pm25">
+      <div class="aqi-top"><span class="aqi-label">PM2.5</span><span class="aqi-icon">🌫️</span></div>
+      <div class="aqi-val" id="v-pm25" style="color:#EF4444">—</div>
+      <div class="aqi-unit">µg/m³</div>
+      <div class="aqi-cat" id="c-pm25" style="color:#EF4444">—</div>
+      <div class="aqi-bar"><div class="aqi-fill" id="b-pm25" style="background:#EF4444;width:0%"></div></div>
+    </div>
+    <div class="aqi-card aqi-pm10">
+      <div class="aqi-top"><span class="aqi-label">PM10</span><span class="aqi-icon">💨</span></div>
+      <div class="aqi-val" id="v-pm10" style="color:#F59E0B">—</div>
+      <div class="aqi-unit">µg/m³</div>
+      <div class="aqi-cat" id="c-pm10" style="color:#F59E0B">—</div>
+      <div class="aqi-bar"><div class="aqi-fill" id="b-pm10" style="background:#F59E0B;width:0%"></div></div>
+    </div>
+    <div class="aqi-card aqi-no2">
+      <div class="aqi-top"><span class="aqi-label">NO₂</span><span class="aqi-icon">🍃</span></div>
+      <div class="aqi-val" id="v-no2" style="color:#22C55E">—</div>
+      <div class="aqi-unit">µg/m³</div>
+      <div class="aqi-cat" id="c-no2" style="color:#22C55E">—</div>
+      <div class="aqi-bar"><div class="aqi-fill" id="b-no2" style="background:#22C55E;width:0%"></div></div>
+    </div>
+    <div class="aqi-card aqi-co">
+      <div class="aqi-top"><span class="aqi-label">CO</span><span class="aqi-icon">〰️</span></div>
+      <div class="aqi-val" id="v-co" style="color:#3B82F6">—</div>
+      <div class="aqi-unit">mg/m³</div>
+      <div class="aqi-cat" id="c-co" style="color:#3B82F6">—</div>
+      <div class="aqi-bar"><div class="aqi-fill" id="b-co" style="background:#3B82F6;width:0%"></div></div>
+    </div>
+  </div>
+
+  <!-- Main grid: chart + live params -->
+  <div class="main-grid">
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title"><span class="panel-icon">📈</span> AIR QUALITY TREND</div>
+        <div class="tab-btns">
+          <button class="tab-btn active" onclick="loadHist('PM2.5',this)">1H</button>
+          <button class="tab-btn" onclick="loadHist('PM10',this)">6H</button>
+          <button class="tab-btn" onclick="loadHist('NO2',this)">12H</button>
+          <button class="tab-btn" onclick="loadHist('CO',this)">24H</button>
+        </div>
+      </div>
+      <div class="chart-wrap"><canvas id="histChart"></canvas></div>
+      <div class="chart-stats">
+        <div class="cs-item"><div class="cs-val" id="s-max">—</div><div class="cs-lbl">MAX</div></div>
+        <div class="cs-item"><div class="cs-val" id="s-min">—</div><div class="cs-lbl">MIN</div></div>
+        <div class="cs-item"><div class="cs-val" id="s-avg">—</div><div class="cs-lbl">AVG</div></div>
+        <div class="cs-item"><div class="cs-val" id="s-aqi">—</div><div class="cs-lbl">AQI</div></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-title"><span class="panel-icon">📡</span> LIVE PARAMETERS</div>
+      </div>
+      <div class="live-params">
+        <div class="lp-item">
+          <div class="lp-left"><span class="lp-icon">💧</span><span class="lp-label">Humidity</span></div>
+          <div><span class="lp-val" id="lp-hum">—</span><span class="lp-unit">%</span></div>
+        </div>
+        <div class="lp-item">
+          <div class="lp-left"><span class="lp-icon">🌡️</span><span class="lp-label">Temperature</span></div>
+          <div><span class="lp-val" id="lp-temp">—</span><span class="lp-unit">°C</span></div>
+        </div>
+        <div class="lp-item">
+          <div class="lp-left"><span class="lp-icon">💨</span><span class="lp-label">Wind Speed</span></div>
+          <div><span class="lp-val" id="lp-wind">—</span><span class="lp-unit">km/h</span></div>
+        </div>
+      </div>
+      <div class="last-updated">Last Updated: <span id="lp-time">--:--</span></div>
+    </div>
+  </div>
+
+  <!-- LSTM Forecast -->
+  <div class="forecast-panel">
+    <div class="panel-header">
+      <div class="panel-title"><span class="panel-icon">🤖</span> LSTM FORECAST</div>
+      <div class="forecast-controls">
+        <select class="fc-select" id="fc-poll">
+          <option value="PM2.5">PM2.5</option>
+          <option value="PM10">PM10</option>
+          <option value="NO2">NO₂</option>
+          <option value="CO">CO</option>
+        </select>
+        <select class="fc-select" id="fc-steps">
+          <option value="12">Next 12h</option>
+          <option value="24" selected>Next 24h</option>
+          <option value="48">Next 48h</option>
+        </select>
+        <button class="run-btn" onclick="runForecast()">⚡ Run Forecast</button>
+      </div>
+    </div>
+    <div class="forecast-chart-wrap"><canvas id="fcChart"></canvas></div>
+    <div class="forecast-stats">
+      <div class="fs-item"><div class="fs-label">Peak Predicted</div><div class="fs-val" id="fc-peak" style="color:#1A6FC4">—</div></div>
+      <div class="fs-item"><div class="fs-label">Avg Predicted</div><div class="fs-val" id="fc-avg" style="color:#16A34A">—</div></div>
+      <div class="fs-item"><div class="fs-label">Worst Category</div><div class="fs-val" id="fc-cat" style="color:#EF4444">—</div></div>
+      <div class="fs-item"><div class="fs-label">Model</div><div class="fs-val" style="color:#6B7280">LSTM + PyTorch</div></div>
+    </div>
+  </div>
+
+  <!-- Legend -->
+  <div class="legend-panel">
+    <div class="legend-title">INDIA AQI SCALE</div>
+    <div class="legend-items">
+      <div class="legend-item"><div class="legend-dot" style="background:#16A34A"></div>Good (0–50)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#84CC16"></div>Satisfactory (51–100)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#EAB308"></div>Moderate (101–200)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#F97316"></div>Poor (201–300)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#EF4444"></div>Very Poor (301–400)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#A855F7"></div>Severe (401–500)</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let histChart=null, fcChart=null;
+
+// Live time
+function updateTime(){
+  const now=new Date();
+  document.getElementById('live-time').textContent=now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+}
+setInterval(updateTime,1000); updateTime();
+
+// AQI category colours
+const catColor={Good:'#16A34A',Satisfactory:'#84CC16',Moderate:'#EAB308',Poor:'#F97316',['Very Poor']:'#EF4444',Severe:'#A855F7'};
+const catPct={Good:10,Satisfactory:20,Moderate:40,Poor:60,['Very Poor']:'80',Severe:95};
+
+function getColor(cat){return catColor[cat]||'#6B7280';}
+
+// Load current readings
+async function loadCurrent(){
+  try{
+    const res=await fetch('/api/current');
+    const d=await res.json();
+    const p=d.pollutants;
+    const w=d.weather;
+    setCard('pm25',p['PM2.5'].value,p['PM2.5'].unit,'#EF4444');
+    setCard('pm10',p['PM10'].value,p['PM10'].unit,'#F59E0B');
+    setCard('no2', p['NO2'].value, p['NO2'].unit, '#22C55E');
+    setCard('co',  p['CO'].value,  p['CO'].unit,  '#3B82F6');
+    document.getElementById('lp-hum').textContent=w.humidity;
+    document.getElementById('lp-temp').textContent=w.temperature;
+    document.getElementById('lp-wind').textContent=(w.wind_speed*3.6).toFixed(1);
+    const now=new Date();
+    document.getElementById('lp-time').textContent=now.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
+  }catch(e){console.log('API error',e);}
+}
+
+function setCard(id,val,unit,color){
+  document.getElementById('v-'+id).textContent=val;
+  document.getElementById('b-'+id).style.width=Math.min((val/300)*100,100)+'%';
+}
+
+// Historical chart
+async function loadHist(poll,btn){
+  if(btn){document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+  try{
+    const res=await fetch('/api/historical?pollutant='+encodeURIComponent(poll||'PM2.5'));
+    const d=await res.json();
+    const vals=d.values||[];
+    const labels=d.timestamps?d.timestamps.map(t=>t.slice(11,16)):vals.map((_,i)=>i+'h');
+    const mx=Math.max(...vals),mn=Math.min(...vals),av=(vals.reduce((a,b)=>a+b,0)/vals.length).toFixed(1);
+    document.getElementById('s-max').textContent=mx.toFixed(1);
+    document.getElementById('s-min').textContent=mn.toFixed(1);
+    document.getElementById('s-avg').textContent=av;
+    document.getElementById('s-aqi').textContent=d.stats?d.stats.mean.toFixed(0):av;
+    const ctx=document.getElementById('histChart').getContext('2d');
+    if(histChart)histChart.destroy();
+    histChart=new Chart(ctx,{
+      type:'line',
+      data:{labels,datasets:[{label:poll,data:vals,borderColor:'#1A6FC4',backgroundColor:'rgba(26,111,196,0.08)',borderWidth:2,pointRadius:2,pointBackgroundColor:'#1A6FC4',fill:true,tension:0.4}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{
+        x:{ticks:{color:'#9CA3AF',font:{family:'Inter',size:10},maxTicksLimit:8},grid:{color:'#F3F4F6'}},
+        y:{ticks:{color:'#9CA3AF',font:{family:'Inter',size:10}},grid:{color:'#F3F4F6'}}
+      }}
+    });
+  }catch(e){console.log('Hist error',e);}
+}
+
+// Forecast
+async function runForecast(){
+  const poll=document.getElementById('fc-poll').value;
+  const steps=parseInt(document.getElementById('fc-steps').value);
+  try{
+    const res=await fetch('/api/forecast',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pollutant:poll,steps})});
+    const d=await res.json();
+    const preds=d.predictions||[];
+    const vals=preds.map(p=>p.value);
+    const labels=preds.map(p=>p.timestamp?p.timestamp.slice(11,16):'');
+    const mx=Math.max(...vals).toFixed(1);
+    const av=(vals.reduce((a,b)=>a+b,0)/vals.length).toFixed(1);
+    const worst=preds.reduce((w,p)=>{ const o=['Good','Satisfactory','Moderate','Poor','Very Poor','Severe'];return o.indexOf(p.category)>o.indexOf(w)?p.category:w;},'Good');
+    document.getElementById('fc-peak').textContent=mx+' µg/m³';
+    document.getElementById('fc-avg').textContent=av+' µg/m³';
+    document.getElementById('fc-cat').textContent=worst;
+    document.getElementById('fc-cat').style.color=catColor[worst]||'#EF4444';
+    const dotColors=preds.map(p=>catColor[p.category]||'#1A6FC4');
+    const ctx=document.getElementById('fcChart').getContext('2d');
+    if(fcChart)fcChart.destroy();
+    fcChart=new Chart(ctx,{
+      type:'line',
+      data:{labels,datasets:[{label:poll,data:vals,borderColor:'#1A6FC4',backgroundColor:'rgba(26,111,196,0.07)',borderWidth:2,pointRadius:4,pointBackgroundColor:dotColors,fill:true,tension:0.4}]},
+      options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{
+        x:{ticks:{color:'#9CA3AF',font:{family:'Inter',size:10},maxTicksLimit:12},grid:{color:'#F3F4F6'}},
+        y:{ticks:{color:'#9CA3AF',font:{family:'Inter',size:10}},grid:{color:'#F3F4F6'},title:{display:true,text:'Concentration (µg/m³)',color:'#9CA3AF',font:{size:10}}}
+      }}
+    });
+  }catch(e){console.log('Forecast error',e);}
+}
+
+// Init
+loadCurrent();
+loadHist('PM2.5');
+runForecast();
+setInterval(loadCurrent, 60000);
+</script>
+</body>
+</html>

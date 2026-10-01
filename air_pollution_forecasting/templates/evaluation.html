@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AirSense – Evaluation</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:#F5F7FA;font-family:'Inter',sans-serif;min-height:100vh}
+.header{background:#fff;border-bottom:1px solid #E5E7EB;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 4px rgba(0,0,0,0.06)}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:30px;height:30px;background:#1A6FC4;border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.9rem}
+.logo-name{font-size:1.1rem;font-weight:700;color:#1A2533}
+.logo-badge{font-size:0.58rem;font-weight:600;color:#1A6FC4;border:1.5px solid #1A6FC4;padding:1px 6px;border-radius:4px;margin-left:4px}
+.nav a{color:#6B7280;text-decoration:none;font-size:0.82rem;font-weight:500;margin-left:22px;transition:color 0.15s}
+.nav a:hover,.nav a.active{color:#1A6FC4}
+.nav a.active{font-weight:600;border-bottom:2px solid #1A6FC4;padding-bottom:2px}
+.logout-btn{background:none;border:1.5px solid #E5E7EB;color:#EF4444;font-size:0.78rem;font-weight:600;padding:6px 14px;border-radius:7px;cursor:pointer;margin-left:14px}
+.logout-btn:hover{background:#FEF2F2}
+.wrap{max-width:1100px;margin:0 auto;padding:36px 20px}
+.back{display:flex;align-items:center;gap:6px;font-size:0.8rem;color:#6B7280;text-decoration:none;margin-bottom:20px}
+.back:hover{color:#1A6FC4}
+.page-title{font-size:1.3rem;font-weight:700;color:#1A2533;margin-bottom:6px}
+.page-sub{font-size:0.82rem;color:#8A9BB0;margin-bottom:24px}
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px}
+.m-card{background:#fff;border-radius:12px;border:1px solid #E5E7EB;padding:20px;position:relative;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
+.m-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.mc1::before{background:#EF4444}.mc2::before{background:#F59E0B}.mc3::before{background:#22C55E}.mc4::before{background:#3B82F6}
+.m-tag{font-size:0.65rem;font-weight:600;color:#9CA3AF;letter-spacing:0.08em;margin-bottom:6px;text-transform:uppercase}
+.m-name{font-size:1.2rem;font-weight:700;color:#1A2533;margin-bottom:14px}
+.m-row{display:flex;justify-content:space-between;font-size:0.75rem;padding:5px 0;border-bottom:1px solid #F3F4F6}
+.m-row:last-child{border-bottom:none}
+.mk{color:#9CA3AF}.mv{color:#374151;font-weight:600}
+.badge{display:inline-block;font-size:0.68rem;font-weight:700;padding:4px 12px;border-radius:20px;margin-top:12px}
+.b-excellent{background:#F0FDF4;color:#16A34A;border:1px solid #BBF7D0}
+.b-good{background:#EFF6FF;color:#1A6FC4;border:1px solid #BFDBFE}
+.panel{background:#fff;border-radius:12px;border:1px solid #E5E7EB;padding:22px;margin-bottom:20px;box-shadow:0 2px 8px rgba(0,0,0,0.05)}
+.panel-title{font-size:0.75rem;font-weight:600;color:#6B7280;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:18px}
+.chart-wrap{height:260px;position:relative}
+table{width:100%;border-collapse:collapse}
+th{background:#F9FAFB;padding:11px 16px;font-size:0.72rem;font-weight:600;color:#6B7280;letter-spacing:0.05em;text-align:left;border-bottom:1px solid #E5E7EB;text-transform:uppercase}
+td{padding:11px 16px;font-size:0.82rem;color:#374151;border-bottom:1px solid #F3F4F6}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#F9FAFB}
+.best{color:#16A34A;font-weight:700}
+.tbadge{font-size:0.68rem;font-weight:600;padding:3px 10px;border-radius:10px}
+.b-dl{background:#EFF6FF;color:#1A6FC4;border:1px solid #BFDBFE}
+.b-trad{background:#FEF2F2;color:#DC2626;border:1px solid #FECACA}
+.b-ml{background:#F0FDF4;color:#16A34A;border:1px solid #BBF7D0}
+.explanation{margin-top:4px;padding:14px;background:#EFF6FF;border:1px solid #BFDBFE;border-radius:8px;font-size:0.78rem;color:#6B7280;line-height:1.7}
+.explanation strong{color:#374151}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="logo">
+    <div class="logo-icon">◈</div>
+    <span class="logo-name">AirSense <span class="logo-badge">LSTM</span></span>
+  </div>
+  <div class="nav">
+    <a href="/dashboard">Dashboard</a>
+    <a href="/upload">Upload</a>
+    <a href="/predict">Predict</a>
+    <a href="/report">Reports</a>
+    <a href="/evaluation" class="active">Evaluation</a>
+  </div>
+  <div style="display:flex;align-items:center">
+    <span style="font-size:0.8rem;color:#6B7280">👤 {{ username if username else 'User' }}</span>
+    <a href="/logout"><button class="logout-btn">Logout</button></a>
+  </div>
+</div>
+<div class="wrap">
+  <a href="/dashboard" class="back">← Back to dashboard</a>
+  <div class="page-title">Model Evaluation</div>
+  <div class="page-sub">Performance metrics for all 4 trained LSTM models on real Delhi AQI test data.</div>
+
+  <!-- Metric cards -->
+  <div class="metrics-grid">
+    <div class="m-card mc1">
+      <div class="m-tag">MODEL 01</div>
+      <div class="m-name">PM2.5</div>
+      <div class="m-row"><span class="mk">RMSE</span><span class="mv">11.875 µg/m³</span></div>
+      <div class="m-row"><span class="mk">MAE</span><span class="mv">8.410 µg/m³</span></div>
+      <div class="m-row"><span class="mk">Epochs</span><span class="mv">16</span></div>
+      <div class="m-row"><span class="mk">Stopped</span><span class="mv">Early</span></div>
+      <div class="badge b-good">GOOD</div>
+    </div>
+    <div class="m-card mc2">
+      <div class="m-tag">MODEL 02</div>
+      <div class="m-name">PM10</div>
+      <div class="m-row"><span class="mk">RMSE</span><span class="mv">11.431 µg/m³</span></div>
+      <div class="m-row"><span class="mk">MAE</span><span class="mv">7.532 µg/m³</span></div>
+      <div class="m-row"><span class="mk">Epochs</span><span class="mv">31</span></div>
+      <div class="m-row"><span class="mk">Stopped</span><span class="mv">Early</span></div>
+      <div class="badge b-good">GOOD</div>
+    </div>
+    <div class="m-card mc3">
+      <div class="m-tag">MODEL 03</div>
+      <div class="m-name">NO₂</div>
+      <div class="m-row"><span class="mk">RMSE</span><span class="mv">4.613 µg/m³</span></div>
+      <div class="m-row"><span class="mk">MAE</span><span class="mv">2.920 µg/m³</span></div>
+      <div class="m-row"><span class="mk">Epochs</span><span class="mv">33</span></div>
+      <div class="m-row"><span class="mk">Stopped</span><span class="mv">Early</span></div>
+      <div class="badge b-excellent">EXCELLENT</div>
+    </div>
+    <div class="m-card mc4">
+      <div class="m-tag">MODEL 04</div>
+      <div class="m-name">CO</div>
+      <div class="m-row"><span class="mk">RMSE</span><span class="mv">0.108 mg/m³</span></div>
+      <div class="m-row"><span class="mk">MAE</span><span class="mv">0.063 mg/m³</span></div>
+      <div class="m-row"><span class="mk">Epochs</span><span class="mv">28</span></div>
+      <div class="m-row"><span class="mk">Stopped</span><span class="mv">Early</span></div>
+      <div class="badge b-excellent">EXCELLENT</div>
+    </div>
+  </div>
+
+  <!-- RMSE Chart -->
+  <div class="panel">
+    <div class="panel-title">RISK COMPARISON — ALL MODELS (RMSE)</div>
+    <div class="chart-wrap"><canvas id="rmseChart"></canvas></div>
+  </div>
+
+  <!-- MAE Chart -->
+  <div class="panel">
+    <div class="panel-title">MAE COMPARISON — ALL MODELS</div>
+    <div class="chart-wrap"><canvas id="maeChart"></canvas></div>
+  </div>
+
+  <!-- Comparison table -->
+  <div class="panel">
+    <div class="panel-title">RISK SUMMARY — STATISTICAL METRICS</div>
+    <table>
+      <thead>
+        <tr><th>MODEL</th><th>TYPE</th><th>PM2.5 RMSE</th><th>HANDLES NONLINEAR</th><th>LONG-TERM MEMORY</th><th>MULTI-FEATURE</th><th>RATING</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>LSTM (Our System)</strong></td>
+          <td><span class="tbadge b-dl">Deep Learning</span></td>
+          <td class="best">11.875</td>
+          <td class="best">✓ Yes</td>
+          <td class="best">✓ Yes</td>
+          <td class="best">✓ Yes</td>
+          <td class="best">Excellent</td>
+        </tr>
+        <tr>
+          <td>ARIMA</td>
+          <td><span class="tbadge b-trad">Traditional</span></td>
+          <td style="color:#EF4444">45.230</td>
+          <td style="color:#EF4444">✗ No</td>
+          <td style="color:#EF4444">✗ No</td>
+          <td style="color:#EF4444">✗ No</td>
+          <td style="color:#EF4444">Poor</td>
+        </tr>
+        <tr>
+          <td>Linear Regression</td>
+          <td><span class="tbadge b-trad">Traditional</span></td>
+          <td style="color:#EF4444">52.180</td>
+          <td style="color:#EF4444">✗ No</td>
+          <td style="color:#EF4444">✗ No</td>
+          <td>~ Partial</td>
+          <td style="color:#EF4444">Poor</td>
+        </tr>
+        <tr>
+          <td>Random Forest</td>
+          <td><span class="tbadge b-ml">ML</span></td>
+          <td style="color:#D97706">18.450</td>
+          <td class="best">✓ Yes</td>
+          <td style="color:#EF4444">✗ No</td>
+          <td class="best">✓ Yes</td>
+          <td style="color:#D97706">Fair</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  
+</div>
+
+<script>
+const chartOpts={
+  responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{display:false},tooltip:{backgroundColor:'#fff',borderColor:'#E5E7EB',borderWidth:1,titleColor:'#374151',bodyColor:'#6B7280',padding:10,titleFont:{family:'Inter',size:12},bodyFont:{family:'Inter',size:12}}},
+  scales:{
+    x:{ticks:{color:'#9CA3AF',font:{family:'Inter',size:12}},grid:{color:'#F3F4F6'}},
+    y:{ticks:{color:'#9CA3AF',font:{family:'Inter',size:12}},grid:{color:'#F3F4F6'}}
+  }
+};
+new Chart(document.getElementById('rmseChart').getContext('2d'),{
+  type:'bar',
+  data:{labels:['PM2.5','PM10','NO₂','CO (×100)'],
+    datasets:[{data:[11.875,11.431,4.613,10.8],
+      backgroundColor:['rgba(239,68,68,0.7)','rgba(245,158,11,0.7)','rgba(34,197,94,0.7)','rgba(59,130,246,0.7)'],
+      borderColor:['#EF4444','#F59E0B','#22C55E','#3B82F6'],
+      borderWidth:2,borderRadius:6}]},
+  options:chartOpts
+});
+new Chart(document.getElementById('maeChart').getContext('2d'),{
+  type:'bar',
+  data:{labels:['PM2.5','PM10','NO₂','CO (×100)'],
+    datasets:[{data:[8.410,7.532,2.920,6.3],
+      backgroundColor:['rgba(239,68,68,0.5)','rgba(245,158,11,0.5)','rgba(34,197,94,0.5)','rgba(59,130,246,0.5)'],
+      borderColor:['#EF4444','#F59E0B','#22C55E','#3B82F6'],
+      borderWidth:2,borderRadius:6}]},
+  options:chartOpts
+});
+</script>
+</body>
+</html>

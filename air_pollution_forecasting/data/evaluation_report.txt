@@ -1,0 +1,65 @@
+============================================================
+  MODEL EVALUATION REPORT
+============================================================
+
+  Evaluating: PM2.5
+  --------------------------------------------------
+  RMSE  : 8.898 µg/m³   (lower is better)
+  MAE   : 5.321 µg/m³   (lower is better)
+  R²    : 0.9766           (closer to 1.0 is better)
+  MAPE  : 4.83%          (lower is better)
+
+  Model Rating : EXCELLENT
+
+  Predictions saved : data/PM2_5_predictions.csv
+
+  Evaluating: PM10
+  --------------------------------------------------
+  RMSE  : 11.564 µg/m³   (lower is better)
+  MAE   : 7.547 µg/m³   (lower is better)
+  R²    : 0.9642           (closer to 1.0 is better)
+  MAPE  : 6.80%          (lower is better)
+
+  Model Rating : EXCELLENT
+
+  Predictions saved : data/PM10_predictions.csv
+
+  Evaluating: NO2
+  --------------------------------------------------
+  RMSE  : 4.667 µg/m³   (lower is better)
+  MAE   : 2.964 µg/m³   (lower is better)
+  R²    : 0.9776           (closer to 1.0 is better)
+  MAPE  : 8.48%          (lower is better)
+
+  Model Rating : EXCELLENT
+
+  Predictions saved : data/NO2_predictions.csv
+
+  Evaluating: CO
+  --------------------------------------------------
+  RMSE  : 0.094 mg/m³   (lower is better)
+  MAE   : 0.055 mg/m³   (lower is better)
+  R²    : 0.9827           (closer to 1.0 is better)
+  MAPE  : 3.85%          (lower is better)
+
+  Model Rating : EXCELLENT
+
+  Predictions saved : data/CO_predictions.csv
+
+============================================================
+  SUMMARY
+============================================================
+  Pollutant      RMSE      MAE       R²     MAPE  Rating
+  ----------------------------------------------------------
+  PM2.5         8.898    5.321   0.9766    4.83%  EXCELLENT
+  PM10         11.564    7.547   0.9642     6.8%  EXCELLENT
+  NO2           4.667    2.964   0.9776    8.48%  EXCELLENT
+  CO            0.094    0.055   0.9827    3.85%  EXCELLENT
+
+  Metric Guide:
+  RMSE  = Root Mean Square Error (penalises large errors)
+  MAE   = Mean Absolute Error    (average prediction error)
+  R²    = How well model fits    (1.0 = perfect)
+  MAPE  = Mean Absolute % Error  (error as percentage)
+
+  Next step: python app.py  ->  http://127.0.0.1:5000

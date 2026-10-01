@@ -1,0 +1,19 @@
+{
+  "pollutant": "NO2",
+  "rmse": 4.667,
+  "mae": 2.964,
+  "features": [
+    "PM2.5",
+    "PM10",
+    "NO2",
+    "CO",
+    "temperature",
+    "humidity",
+    "wind_speed"
+  ],
+  "seq_len": 24,
+  "target_idx": 2,
+  "hidden_size": 64,
+  "num_layers": 2,
+  "dropout": 0.2
+}

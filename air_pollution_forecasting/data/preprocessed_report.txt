@@ -1,0 +1,119 @@
+============================================================
+  STEP 1 : LOAD REAL DATASET
+============================================================
+  File     : data/delhi-weather-aqi-2025.csv
+  Shape    : 52560 rows x 16 columns
+  Columns  : ['date_ist', 'time_ist', 'location', 'lat', 'lon', 'temp_c', 'humidity', 'pressure_mb', 'windspeed_kph', 'condition_text', 'description', 'aqi_index', 'pm2_5', 'pm10', 'co', 'no2']
+  Locations: ['Anand Vihar', 'Connaught Place', 'Dwarka', 'Okhla Phase III', 'Rohini', 'IGI Airport']
+
+============================================================
+  STEP 2 : SELECT LOCATION
+============================================================
+  Selected : Anand Vihar
+  Rows     : 8760
+
+============================================================
+  COLUMN MAPPING
+============================================================
+  pm2_5         -> PM2.5        (ug/m3)
+  pm10          -> PM10         (ug/m3)
+  no2           -> NO2          (ug/m3)
+  co / 1000     -> CO           (mg/m3)
+  temp_c        -> temperature  (C)
+  humidity      -> humidity     (%)
+  windspeed/3.6 -> wind_speed   (m/s)
+  Date range    : 2025-01-01 00:00:00 to 2025-12-31 23:00:00
+  Total rows    : 8760
+
+============================================================
+  MISSING VALUE ANALYSIS
+============================================================
+  Column                Missing    Percent
+  ----------------------------------------
+  PM2.5                       0       0.0%
+  PM10                        0       0.0%
+  NO2                         0       0.0%
+  CO                          0       0.0%
+  temperature                 0       0.0%
+  humidity                    0       0.0%
+  wind_speed                  0       0.0%
+
+  Total missing: 0
+
+============================================================
+   HANDLE MISSING VALUES
+============================================================
+  Method  : Forward Fill -> Backward Fill -> Mean Fill
+  Missing after treatment : 0
+
+============================================================
+   REMOVE DUPLICATES
+============================================================
+  Duplicates removed : 0
+  Rows remaining     : 8760
+
+============================================================
+   OUTLIER DETECTION & TREATMENT (IQR Method)
+============================================================
+  Column            Outliers  Action
+  --------------------------------------------------
+  PM2.5                   86  Clipped to [0.00, 245.00]
+  PM10                   376  Clipped to [0.00, 600.00]
+  NO2                     27  Clipped to [0.00, 134.80]
+  CO                     109  Clipped to [0.00, 3.17]
+  temperature              0  Clipped to [-5.00, 50.00]
+  humidity                 0  Clipped to [0.00, 100.00]
+  wind_speed               3  Clipped to [0.00, 5.94]
+
+============================================================
+  SAVE CLEANED DATA
+============================================================
+  Saved : data/air_quality.csv
+  Shape : (8760, 10)
+
+============================================================
+   FEATURE ENGINEERING
+============================================================
+  Added : time features, cyclical encoding, rolling avg, lag features
+  Shape after feature engineering : (8736, 43)
+
+============================================================
+  NORMALISATION (MinMaxScaler -> [0, 1])
+============================================================
+  Columns scaled : ['PM2.5', 'PM10', 'NO2', 'CO', 'temperature', 'humidity', 'wind_speed']
+  Scaler saved   : models/preprocessing_scaler.pkl
+
+============================================================
+  STEP 11 : DATA SPLIT (70% / 15% / 15%)
+============================================================
+  Total      : 8,736 rows
+  Train      : 6,115 rows
+  Validation : 1,310 rows
+  Test       : 1,311 rows
+
+============================================================
+  FINAL STATISTICS
+============================================================
+
+  Pollutant       Min      Max     Mean      Std  Unit
+  -------------------------------------------------------
+  PM2.5          6.00   245.00    79.92    44.22  ug/m3
+  PM10           6.10   600.00   191.83   155.29  ug/m3
+  NO2            2.50   134.80    33.81    25.65  ug/m3
+  CO             0.17     3.17     0.93     0.62  mg/m3
+
+  AQI Category Distribution:
+    Moderate         6,290  (71.8%)
+    Poor             1,214  (13.9%)
+    Very Poor          449  (5.1%)
+    Severe             446  (5.1%)
+    Satisfactory       361  (4.1%)
+
+============================================================
+  PREPROCESSING COMPLETE
+============================================================
+  Clean data     : data/air_quality.csv
+  Processed data : data/processed_data.csv
+  Final shape    : 8,736 rows x 43 columns
+
+  Next step: python train_model.py
